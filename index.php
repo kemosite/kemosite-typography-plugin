@@ -8,6 +8,7 @@ defined( 'ABSPATH' ) or die();
  */
 /*
 Plugin Name: kemosite typography plug-in for Wordpress
+Description: (Release Candidate) This plug-in establishes a reasonable typographic baseline for all devices. Version matches last tested Wordpress.
 Author: Kevin Montgomery
 Version: 4.8.1
 Plugin URI: http://kemosite.com
