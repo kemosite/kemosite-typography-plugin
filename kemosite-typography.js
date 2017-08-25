@@ -84,6 +84,7 @@ var typography_obj = new function() {
 		font_height_em_min: "",
 		font_height_em_avg: "",
 		font_height_em_max: "",
+		font_size_adjust: "",
 		// ex_height_diameter_pixels_min: "",
 		// ex_height_diameter_pixels_avg: "",
 		// ex_height_diameter_pixels_max: "",
@@ -238,6 +239,9 @@ var typography_obj = new function() {
 	    typography_obj.outputs.line_length_em_avg = Math.max(39, typography_obj.outputs.font_height_pixels_avg * 2);
 	    typography_obj.outputs.line_length_em_max = Math.max(39, typography_obj.outputs.font_height_pixels_max * 2);
 
+	    /* [Font Size Adjust] */
+	    typography_obj.outputs.font_size_adjust = typography_obj.parameters.font_height_ratio;
+
 	    /*
 	     * Apply style properties to "typography" class
 	     * Locate all elements with applicable "typography" class and adjust them.
@@ -265,6 +269,7 @@ var typography_obj = new function() {
 		"} " +
 		"body.typography { "+
 		"font-size: "+typography_obj.outputs.font_height_em_avg+"em; "+
+		"font-size-adjust: "+typography_obj.outputs.font_size_adjust+"; "+
 		"} ";
 
 		var typography_copy_margins = "html .small.typography.lines, "+
@@ -394,7 +399,7 @@ var typography_obj = new function() {
 	this.orphans_control = function() {
 
 	    /* [Locate elements for typesetter] */
-	    var typesetter_elements = document.querySelectorAll("html .typography.orphans, "+
+	    var typesetter_elements = document.querySelectorAll(
 	     	"body.typography.orphans h1, "+
 	     	"body.typography.orphans h2, "+
 	     	"body.typography.orphans h3, "+
@@ -403,7 +408,8 @@ var typography_obj = new function() {
 	     	"body.typography.orphans h6, "+
 	     	"body.typography.orphans p," +
 	     	"body.typography.orphans td," +
-	     	"body.typography.orphans li");
+	     	"body.typography.orphans li"
+	     );
 
 	    var punctuation = new Array("!", ".", ",", "?", ":", ";");
 
