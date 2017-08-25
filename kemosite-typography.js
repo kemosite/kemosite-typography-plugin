@@ -269,7 +269,6 @@ var typography_obj = new function() {
 		"} " +
 		"body.typography { "+
 		"font-size: "+typography_obj.outputs.font_height_em_avg+"em; "+
-		"font-size-adjust: "+typography_obj.outputs.font_size_adjust+"; "+
 		"} ";
 
 		var typography_copy_margins = "html .small.typography.lines, "+
