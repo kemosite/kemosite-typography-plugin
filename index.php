@@ -135,8 +135,14 @@ function load_kemosite_typography_script() {
 	wp_add_inline_script( 'kemosite-typography', 'typography_obj.init(); console.log(typography_obj);' );
 
 }
-
 add_action('wp_enqueue_scripts', 'load_kemosite_typography_script');
+
+function load_kemosite_typography_css() {
+	
+	echo '<link rel="stylesheet/less" type="text/css" href="' . plugins_url() . '/kemosite-typography-plugin/kemosite-typography.css" />' . "\n";
+	
+}
+add_action('wp_head', 'load_kemosite_typography_css');
 
 if ( !function_exists('is_user_logged_in') ) :
 /**

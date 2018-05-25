@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+html .typography.lines,
+body.typography.lines blockquote,
+body.typography.lines p,
+body.typography.lines td,
+body.typography.lines th,
+body.typography.lines li
+{
+	line-height: 3ex;
+	max-width: 75ex;
+	margin-top: 1ex;
+	margin-bottom: 1ex;
+	margin-left: auto;
+	margin-right: auto;
+} 
+
+
+body.typography.lines h1,
+body.typography.lines h2,
+body.typography.lines h3,
+body.typography.lines h4,
+body.typography.lines h5,
+body.typography.lines h6
+{
+	margin: 1ex auto .25ex;
+}

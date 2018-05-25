@@ -119,7 +119,7 @@ var typography_obj = new function() {
 		var user_properties_obj = document.createElement("div");
 			user_properties_obj.setAttribute("id", "user_properties_obj");
 			user_properties_obj.setAttribute("style", "line-height: 100%, padding: 0, margin: 0; width: 1in;");
-			user_properties_obj.innerHTML = "This is an honest to goodness test";
+			user_properties_obj.innerHTML = "Typography";
 			document.getElementsByTagName("body")[0].insertBefore(user_properties_obj, document.getElementsByTagName("body")[0].childNodes[0]);
 
 	    /* [Calculate users font size] */
@@ -129,7 +129,7 @@ var typography_obj = new function() {
 		typography_obj.user_configuration.screen_resolution = Math.max(user_properties_obj.scrollWidth,user_properties_obj.offsetWidth,user_properties_obj.clientWidth);
 	    
 	    /* [Reduce element font size to calculate 1ex] */
-	    user_properties_obj.setAttribute("style", "font-size: 1ex;");  
+	    user_properties_obj.setAttribute("style", "line-height: 100%, padding: 0, margin: 0; width: 1in; font-size: 1ex;");  
 		typography_obj.user_configuration.ex_height_pixels = Math.max(user_properties_obj.scrollHeight, user_properties_obj.offsetHeight, user_properties_obj.clientHeight);
 
 	    /* [Remove testing object] */
@@ -235,9 +235,11 @@ var typography_obj = new function() {
 		*/
 
 	    /* [Calculate ideal line length, compare the 'alphabet-and-a-half rule' to the 'points-times-two' rule] */
+	    /*
 	    typography_obj.outputs.line_length_em_min = Math.max(39, typography_obj.outputs.font_height_pixels_min * 2);
 	    typography_obj.outputs.line_length_em_avg = Math.max(39, typography_obj.outputs.font_height_pixels_avg * 2);
 	    typography_obj.outputs.line_length_em_max = Math.max(39, typography_obj.outputs.font_height_pixels_max * 2);
+	    */
 
 	    /* [Font Size Adjust] */
 	    typography_obj.outputs.font_size_adjust = typography_obj.parameters.font_height_ratio;
@@ -271,67 +273,40 @@ var typography_obj = new function() {
 		"font-size: "+typography_obj.outputs.font_height_em_avg+"em; "+
 		"} ";
 
+		/*
 		var typography_copy_margins = "html .small.typography.lines, "+
 	     	"body.small.typography.lines blockquote, " +
 	     	"body.small.typography.lines p, " +
 	     	"body.small.typography.lines td, " +
+	     	"body.small.typography.lines th, " +
 	     	"body.small.typography.lines li " +
 		"{ "+
-		// "line-height: "+typography_obj.outputs.line_height_em+"em; "+
-		"line-height: 3ex; "+
-		// "line-height: "+typography_obj.outputs.line_height_em+"rem; "+
-		// "max-width: "+typography_obj.outputs.line_length_em_min+"em; "+
 		"max-width: "+typography_obj.outputs.line_length_em_min+"rem; "+
-		// "margin-top: "+typography_obj.outputs.line_space_before_em+"em; "+
-		"margin-top: 1ex; "+
-		// "margin-top: "+typography_obj.outputs.line_space_before_em+"rem; "+
-		// "margin-bottom: "+typography_obj.outputs.line_space_after_em+"em; "+
-		"margin-bottom: 1ex; "+
-		// "margin-bottom: "+typography_obj.outputs.line_space_after_em+"rem; "+
-		"margin-left: auto; "+
-		"margin-right: auto; "+
 		"} " + 
 		"html .large.typography.lines, "+
 	     	"body.large.typography.lines blockquote, " +
 	     	"body.large.typography.lines p, " +
 	     	"body.large.typography.lines td, " +
+	     	"body.large.typography.lines th, " +
 	     	"body.large.typography.lines li " +
 		"{ "+
-		"line-height: 3ex; "+
-		// "max-width: "+typography_obj.outputs.line_length_em_max+"em; "+
 		"max-width: "+typography_obj.outputs.line_length_em_max+"rem; "+
-		"margin-top: 1ex; "+
-		"margin-bottom: 1ex; "+
-		"margin-left: auto; "+
-		"margin-right: auto; "+
-		"} " + 
-		"html .average.typography.lines, "+
-	     	"body.average.typography.lines blockquote, " +
-	     	"body.average.typography.lines p, " +
-	     	"body.average.typography.lines td, " +
-	     	"body.average.typography.lines li " +
-		"{ "+
-		"line-height: 3ex; "+
-		// "max-width: "+typography_obj.outputs.line_length_em_avg+"em; "+
-		"max-width: "+typography_obj.outputs.line_length_em_avg+"rem; "+
-		"margin-top: 1ex; "+
-		"margin-bottom: 1ex; "+
-		"margin-left: auto; "+
-		"margin-right: auto; "+
 		"} " + 
 		"html .typography.lines, "+
 	     	"body.typography.lines blockquote, " +
 	     	"body.typography.lines p, " +
 	     	"body.typography.lines td, " +
+	     	"body.typography.lines th, " +
 	     	"body.typography.lines li " +
 		"{ "+
 		"line-height: 3ex; "+
-		// "max-width: "+typography_obj.outputs.line_length_em_avg+"em; "+
-		"max-width: "+typography_obj.outputs.line_length_em_avg+"rem; "+
+		"max-width: "+typography_obj.outputs.line_length_em_avg+"em; "+
+		// "min-width: 45ex; "+
+		// "max-width: 75ex; "+
 		"margin-top: 1ex; "+
 		"margin-bottom: 1ex; "+
-		"margin-left: auto; "+
-		"margin-right: auto; "+
+		// "margin-left: auto; "+
+		// "margin-right: auto; "+
 		"} ";
 
 		var typography_header_margins = "body.small.typography.lines h1, "+
@@ -340,8 +315,6 @@ var typography_obj = new function() {
 	     	"body.small.typography.lines h4, "+
 	     	"body.small.typography.lines h5, "+
 	     	"body.small.typography.lines h6, "+
-	     	"body.small.typography.lines ol, "+
-	     	"body.small.typography.lines ul "+
 		"{ "+
 		"max-width: "+typography_obj.outputs.line_length_em_min+"rem; "+
 		"margin: 1ex auto .25ex; "+
@@ -352,8 +325,6 @@ var typography_obj = new function() {
 	     	"body.large.typography.lines h4, "+
 	     	"body.large.typography.lines h5, "+
 	     	"body.large.typography.lines h6, "+
-	     	"body.large.typography.lines ol, "+
-	     	"body.large.typography.lines ul "+
 		"{ "+
 		"max-width: "+typography_obj.outputs.line_length_em_max+"rem; "+
 		"margin: 1ex auto .25ex; "+
@@ -364,8 +335,6 @@ var typography_obj = new function() {
 	     	"body.average.typography.lines h4, "+
 	     	"body.average.typography.lines h5, "+
 	     	"body.average.typography.lines h6, "+
-	     	"body.average.typography.lines ol, "+
-	     	"body.average.typography.lines ul "+
 		"{ "+
 		"max-width: "+typography_obj.outputs.line_length_em_avg+"rem; "+
 		"margin: 1ex auto .25ex; "+
@@ -382,16 +351,43 @@ var typography_obj = new function() {
 		"max-width: "+typography_obj.outputs.line_length_em_avg+"rem; "+
 		"margin: 1ex auto .25ex; "+
 		"} ";
+		*/
 
 		if (typography_css.styleSheet) {
-			typography_css.styleSheet.cssText = typography_body_size + typography_copy_margins + typography_header_margins;
+			typography_css.styleSheet.cssText = typography_body_size; // + typography_copy_margins + typography_header_margins;
 		} else {
 			typography_css.appendChild(document.createTextNode(typography_body_size));
-			typography_css.appendChild(document.createTextNode(typography_copy_margins));
-			typography_css.appendChild(document.createTextNode(typography_header_margins));
+			// typography_css.appendChild(document.createTextNode(typography_copy_margins));
+			// typography_css.appendChild(document.createTextNode(typography_header_margins));
 		}
 
 		document.getElementsByTagName("head")[0].appendChild(typography_css);
+
+	};
+
+	this.recursive_locate_text = function(node) {
+
+		// console.log("Examine Node");
+		// console.log(node);
+		
+		//If not text node but childNodes is populated, and a text type is found, use it
+		if (node.childNodes && node.childNodes.length > 0 && node.childNodes[0].nodeName == "#text") {
+			// console.log("Text Node Identified");
+			// console.log(node.childNodes[0]);
+			return node;
+		} 
+
+		// If no text type found, but more childNodes found, explore further
+		else if (node.childNodes && node.childNodes.length > 0) {
+			// console.log("No text nodes yet, but more to explore...");
+			return typography_obj.recursive_locate_text(node.childNodes[0]);
+		}
+
+		// We've got nuthin'.
+		else {
+			return node;
+		}
+		
 
 	};
 
@@ -414,40 +410,47 @@ var typography_obj = new function() {
 
 	    for (var i = 0; i < typesetter_elements.length; i++) {
 
-			/* [Apply orphan control] */
-	    	var line = typesetter_elements[i].innerHTML;
-	    	var word_array = line.split(" ");
-	    	var word_count = word_array.length;
+	    	var line = typography_obj.recursive_locate_text(typesetter_elements[i]);
 	    	
-	    	for (var ii = 0; ii < word_array.length - 2; ii++) { // Look at each word for punctuation
-	    		
-	    		var word = word_array[ii];
-				var evaluate_punctuation = word.substring(word.length - 1, word.length);
+	    	if (line.innerHTML !== null) {
 
-	    		/*
-	    		 * If punctuation is found, apply non-breaking spaces to the preceding and following words.
-	    		 */
-	    		
-	    		if (ii > 0 && punctuation.indexOf(evaluate_punctuation) > 0) {
-	    			var preceding_words =  new Array(word_array[ii - 1], word);
-	    			var preceding_words_join = preceding_words.join("&nbsp;");
-	    			word_array.splice(ii - 1, 2, preceding_words_join);
-	    			ii--;
+	    		var line_string = line.innerHTML.toString();
 
-	    			var following_words =  new Array(word_array[ii + 1], word_array[ii + 2]);
-	    			var following_words_join = following_words.join("&nbsp;");
-	    			word_array.splice(ii + 1, 2, following_words_join);
+				/* [Apply orphan control] */
+		    	var word_array = line_string.split(" ");
+		    	var word_count = word_array.length;
+		    	
+		    	for (var ii = 0; ii < word_array.length - 2; ii++) { // Look at each word for punctuation
+		    		
+		    		var word = word_array[ii];
+					var evaluate_punctuation = word.substring(word.length - 1, word.length);
 
-	    		}
-	    		
-	    	}
+		    		/*
+		    		 * If punctuation is found, apply non-breaking spaces to the preceding and following words.
+		    		 */
+		    		
+		    		if (ii > 0 && punctuation.indexOf(evaluate_punctuation) > 0) {
+		    			var preceding_words =  new Array(word_array[ii - 1], word);
+		    			var preceding_words_join = preceding_words.join("&nbsp;");
+		    			word_array.splice(ii - 1, 2, preceding_words_join);
+		    			ii--;
 
-	    	var last_words =  word_array.splice(-2);
-	    	var last_words_join = last_words.join("&nbsp;");
-			word_array.push(last_words_join);
+		    			var following_words =  new Array(word_array[ii + 1], word_array[ii + 2]);
+		    			var following_words_join = following_words.join("&nbsp;");
+		    			word_array.splice(ii + 1, 2, following_words_join);
 
-			line = word_array.join(" ");
-			typesetter_elements[i].innerHTML = line;
+		    		}
+		    		
+		    	}
+
+		    	var last_words =  word_array.splice(-2);
+		    	var last_words_join = last_words.join("&nbsp;");
+				word_array.push(last_words_join);
+
+				line_string = word_array.join(" ");
+				line.innerHTML = line_string;
+								
+			}
 
 		}
 
@@ -472,75 +475,81 @@ var typography_obj = new function() {
 	    for (var i = 0; i < typesetter_elements.length; i++) {
 
 			/* [Apply orphan control] */
-	    	var line = typesetter_elements[i].innerHTML;
-	    	var word_array = line.split(" ");
-	    	var word_count = word_array.length;
-	    	var open_double_quote = false;
-    		var open_single_quote = false;
+	    	var line = typography_obj.recursive_locate_text(typesetter_elements[i]);
+	    	
+	    	if (line.innerHTML !== null) {
 
-	    	for (var ii = 0; ii < word_array.length; ii++) { // Look at each word for punctuation
-	    		
-	    		var word = word_array[ii];
+	    		var line_string = line.innerHTML.toString();
+		    	var word_array = line_string.split(" ");
+		    	var word_count = word_array.length;
+		    	var open_double_quote = false;
+	    		var open_single_quote = false;
 
-	    		var has_punctuation = "";
-	    		var evaluate_punctuation = word.substring(word.length - 1, word.length);
-	    		var evaluate_open_quotes = word.substring(0,1);
+		    	for (var ii = 0; ii < word_array.length; ii++) { // Look at each word for punctuation
+		    		
+		    		var word = word_array[ii];
 
-				// The process of evaluating opening and closing quotes needs to be re-evaluated.
+		    		var has_punctuation = "";
+		    		var evaluate_punctuation = word.substring(word.length - 1, word.length);
+		    		var evaluate_open_quotes = word.substring(0,1);
 
-				/* [If punctuation is found] */
-	    		if (ii > 0 && punctuation.indexOf(evaluate_punctuation) > 0) {
-	    			var evaluate_close_quotes = word.substring(word.length - 2, word.length - 1);
-	    			has_punctuation = evaluate_punctuation;
-	    		} else {
-	    			var evaluate_close_quotes = word.substring(word.length - 1, word.length);
-	    		}
-	    		
-				/* [Double Quotes] */
-				if (evaluate_open_quotes == '"') { 
-	    			open_double_quote = true;
-	    			word = "&ldquo;" + word.substring(1, word.length);
-	    			word_array[ii] = word;
-	    		}
+					// The process of evaluating opening and closing quotes needs to be re-evaluated.
 
-				if (evaluate_close_quotes == '"' && open_double_quote == true) {
-					if (has_punctuation.length > 0) {
-						word = word.substring(0, word.length - 2) + "&rdquo;" + has_punctuation;
-					} else {
-						word = word.substring(0, word.length - 1) + "&rdquo;";
+					/* [If punctuation is found] */
+		    		if (ii > 0 && punctuation.indexOf(evaluate_punctuation) > 0) {
+		    			var evaluate_close_quotes = word.substring(word.length - 2, word.length - 1);
+		    			has_punctuation = evaluate_punctuation;
+		    		} else {
+		    			var evaluate_close_quotes = word.substring(word.length - 1, word.length);
+		    		}
+		    		
+					/* [Double Quotes] */
+					if (evaluate_open_quotes == '"') { 
+		    			open_double_quote = true;
+		    			word = "&ldquo;" + word.substring(1, word.length);
+		    			word_array[ii] = word;
+		    		}
+
+					if (evaluate_close_quotes == '"' && open_double_quote == true) {
+						if (has_punctuation.length > 0) {
+							word = word.substring(0, word.length - 2) + "&rdquo;" + has_punctuation;
+						} else {
+							word = word.substring(0, word.length - 1) + "&rdquo;";
+						}
+						word_array[ii] = word;
+						open_double_quote = false;
 					}
-					word_array[ii] = word;
-					open_double_quote = false;
-				}
 
-				/* [Single Quotes] */
-				if (evaluate_open_quotes == "'") { 
-	    			open_single_quote = true;
-	    			word = "&lsquo;" + word.substring(1, word.length);
-	    			word_array[ii] = word;
+					/* [Single Quotes] */
+					if (evaluate_open_quotes == "'") { 
+		    			open_single_quote = true;
+		    			word = "&lsquo;" + word.substring(1, word.length);
+		    			word_array[ii] = word;
+		    		}
+					
+					if (evaluate_close_quotes == "'" && open_single_quote == true) {
+						if (has_punctuation.length > 0) {
+							word = word.substring(0, word.length - 2) + "&rsquo;" + has_punctuation;
+						} else {
+							word = word.substring(0, word.length - 1) + "&rsquo;";
+						}
+						word_array[ii] = word;
+						open_single_quote = false;
+					}
+
+					/* [Apostrophes] */
+					var evaluate_apostrophes = word.substring(1, word.length - 1);
+					if (evaluate_apostrophes.indexOf("'")) {
+						word = word.replace("'","&rsquo;");
+						word_array[ii] = word;
+					}
+
 	    		}
+
+				line_string = word_array.join(" ");
+				line.innerHTML = line_string;
 				
-				if (evaluate_close_quotes == "'" && open_single_quote == true) {
-					if (has_punctuation.length > 0) {
-						word = word.substring(0, word.length - 2) + "&rsquo;" + has_punctuation;
-					} else {
-						word = word.substring(0, word.length - 1) + "&rsquo;";
-					}
-					word_array[ii] = word;
-					open_single_quote = false;
-				}
-
-				/* [Apostrophes] */
-				var evaluate_apostrophes = word.substring(1, word.length - 1);
-				if (evaluate_apostrophes.indexOf("'")) {
-					word = word.replace("'","&rsquo;");
-					word_array[ii] = word;
-				}
-
-    		}
-
-			line = word_array.join(" ");
-			typesetter_elements[i].innerHTML = line;
+			}
 
 		}
 
