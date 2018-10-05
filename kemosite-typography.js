@@ -235,11 +235,9 @@ var typography_obj = new function() {
 		*/
 
 	    /* [Calculate ideal line length, compare the 'alphabet-and-a-half rule' to the 'points-times-two' rule] */
-	    /*
 	    typography_obj.outputs.line_length_em_min = Math.max(39, typography_obj.outputs.font_height_pixels_min * 2);
 	    typography_obj.outputs.line_length_em_avg = Math.max(39, typography_obj.outputs.font_height_pixels_avg * 2);
 	    typography_obj.outputs.line_length_em_max = Math.max(39, typography_obj.outputs.font_height_pixels_max * 2);
-	    */
 
 	    /* [Font Size Adjust] */
 	    typography_obj.outputs.font_size_adjust = typography_obj.parameters.font_height_ratio;
@@ -274,41 +272,30 @@ var typography_obj = new function() {
 		"} ";
 
 		/*
-		var typography_copy_margins = "html .small.typography.lines, "+
-	     	"body.small.typography.lines blockquote, " +
-	     	"body.small.typography.lines p, " +
-	     	"body.small.typography.lines td, " +
-	     	"body.small.typography.lines th, " +
-	     	"body.small.typography.lines li " +
+		var typography_copy_margins = 
+     	"body.small.typography.lines div.content, " +
 		"{ "+
-		"max-width: "+typography_obj.outputs.line_length_em_min+"rem; "+
+			"max-width: "+typography_obj.outputs.line_length_em_min+"rem; "+
+			"max-width: "+typography_obj.outputs.line_length_em_min+"ch; "+
+			"margin-left: auto;" +
+			"margin-right: auto;" +
 		"} " + 
-		"html .large.typography.lines, "+
-	     	"body.large.typography.lines blockquote, " +
-	     	"body.large.typography.lines p, " +
-	     	"body.large.typography.lines td, " +
-	     	"body.large.typography.lines th, " +
-	     	"body.large.typography.lines li " +
+     	"body.large.typography.lines div.content, " +
 		"{ "+
-		"max-width: "+typography_obj.outputs.line_length_em_max+"rem; "+
+			"max-width: "+typography_obj.outputs.line_length_em_max+"rem; "+
+			"max-width: "+typography_obj.outputs.line_length_em_max+"ch; "+
+			"margin-left: auto;" +
+			"margin-right: auto;" +
 		"} " + 
-		"html .typography.lines, "+
-	     	"body.typography.lines blockquote, " +
-	     	"body.typography.lines p, " +
-	     	"body.typography.lines td, " +
-	     	"body.typography.lines th, " +
-	     	"body.typography.lines li " +
+     	"body.typography.lines div.content, " +
 		"{ "+
-		"line-height: 3ex; "+
-		"max-width: "+typography_obj.outputs.line_length_em_avg+"em; "+
-		// "min-width: 45ex; "+
-		// "max-width: 75ex; "+
-		"margin-top: 1ex; "+
-		"margin-bottom: 1ex; "+
-		// "margin-left: auto; "+
-		// "margin-right: auto; "+
+			"max-width: "+typography_obj.outputs.line_length_em_avg+"rem; "+
+			"max-width: "+typography_obj.outputs.line_length_em_avg+"ch; "+
+			"margin-left: auto;" +
+			"margin-right: auto;" +
 		"} ";
 
+		/*
 		var typography_header_margins = "body.small.typography.lines h1, "+
 	     	"body.small.typography.lines h2, "+
 	     	"body.small.typography.lines h3, "+
@@ -354,7 +341,7 @@ var typography_obj = new function() {
 		*/
 
 		if (typography_css.styleSheet) {
-			typography_css.styleSheet.cssText = typography_body_size; // + typography_copy_margins + typography_header_margins;
+			typography_css.styleSheet.cssText = typography_body_size; // + typography_copy_margins; // + typography_header_margins;
 		} else {
 			typography_css.appendChild(document.createTextNode(typography_body_size));
 			// typography_css.appendChild(document.createTextNode(typography_copy_margins));

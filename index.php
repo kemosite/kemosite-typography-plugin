@@ -4,13 +4,13 @@ defined( 'ABSPATH' ) or die();
 
 /**
  * @package kemosite typography plug-in for Wordpress
- * @version 4.9.6
+ * @version 4.9.8
  */
 /*
 Plugin Name: kemosite typography plug-in for Wordpress
 Description: (Release Candidate) This plug-in establishes a reasonable typographic baseline for all devices. Version matches last tested Wordpress.
 Author: Kevin Montgomery
-Version: 4.9.6
+Version: 4.9.8
 Plugin URI: http://kemosite.com
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
