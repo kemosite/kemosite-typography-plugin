@@ -1,8 +1,10 @@
-=== kemosite-typography-plugin ===
+# kemosite-typography-plugin
+Blank Wordpress Theme - Up to WP 4.9.8
+
 Contributors: Kevin Montgomery
-Tags: adaptive, javascript, release candidate
+Tags: adaptive, javascript
 Requires at least: 4.0
-Tested up to: 4.9.6
+Tested up to: 4.9.8
 Stable tag: stable tag
 License: licence
 License URI: License URI
@@ -10,7 +12,7 @@ License URI: License URI
 short Description of plugin
 
 == Description ==
-Long Description of plugin
+Long Description of theme
 
 == Installation ==
 how to install.
