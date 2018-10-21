@@ -2,7 +2,7 @@
 Contributors: Kevin Montgomery
 Tags: adaptive, javascript, release candidate
 Requires at least: 4.0
-Tested up to: 4.9.6
+Tested up to: 4.8.1
 Stable tag: stable tag
 License: licence
 License URI: License URI
