@@ -1,21 +1,7 @@
 <?php
 
 defined( 'ABSPATH' ) or die();
-<<<<<<< Updated upstream
 
-/**
- * @package kemosite typography plug-in for Wordpress
- * @version 4.8.1
- */
-/*
-Plugin Name: kemosite typography plug-in for Wordpress
-Description: (Release Candidate) This plug-in establishes a reasonable typographic baseline for all devices. Version matches last tested Wordpress.
-Author: Kevin Montgomery
-Version: 4.8.1
-Plugin URI: http://kemosite.com
-License:     GPL2
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
-=======
 $version = '5.4.0.1';
 
 /**
@@ -35,7 +21,6 @@ Requires PHP: 7.3.5
 License: GNU General Public License v2 or later
 License URI: LICENSE
 Text Domain: kemosite-wordpress-theme
->>>>>>> Stashed changes
 */
 
 add_action( 'admin_menu', 'kemosite_typography_menu' );
@@ -53,13 +38,7 @@ function kemosite_typography_menu() {
 function register_kemosite_typography_settings() { // whitelist options
 	register_setting( 'kemosite-typography', 'activate_kemosite_typography' );
 	register_setting( 'kemosite-typography', 'adaptive_font_size' );
-<<<<<<< Updated upstream
-	register_setting( 'kemosite-typography', 'ideal_line_length_spacing' );
 	register_setting( 'kemosite-typography', 'orphan_control' );
-	register_setting( 'kemosite-typography', 'smart_quotes' );
-=======
-	register_setting( 'kemosite-typography', 'orphan_control' );
->>>>>>> Stashed changes
 }
 
 function  kemosite_typography_settings_page() { ?>
@@ -78,11 +57,7 @@ function  kemosite_typography_settings_page() { ?>
 <?php
 $activate_kemosite_typography = esc_attr( get_option('activate_kemosite_typography'));
 ?>
-<<<<<<< Updated upstream
-<input type="checkbox" name="activate_kemosite_typography" value="typography"<?php if ($activate_kemosite_typography === "typography"): echo ' checked="checked"'; endif;?>>
-=======
 <input type="checkbox" name="activate_kemosite_typography" value="activate_kemosite_typography"<?php if ($activate_kemosite_typography === "activate_kemosite_typography"): echo ' checked="checked"'; endif;?>>
->>>>>>> Stashed changes
 <p><em>None of these settings will work if this box is left unchecked.</em></p>
 </td>
 </tr>
@@ -102,39 +77,12 @@ $adaptive_font_size = esc_attr( get_option('adaptive_font_size'));
 </tr>
 
 <tr valign="top">
-<<<<<<< Updated upstream
-<th scope="row">Ideal Line Length and Spacing</th>
-<td>
-<?php
-$ideal_line_length_spacing = esc_attr( get_option('ideal_line_length_spacing'));
-?>
-<input type="checkbox" name="ideal_line_length_spacing" value="lines"<?php if ($ideal_line_length_spacing === "lines"): echo ' checked="checked"'; endif;?>>
-</td>
-</tr>
-
-<tr valign="top">
-=======
->>>>>>> Stashed changes
 <th scope="row">Orphan Control</th>
 <td>
 <?php
 $orphan_control = esc_attr( get_option('orphan_control'));
 ?>
-<<<<<<< Updated upstream
-<input type="checkbox" name="orphan_control" value="orphans"<?php if ($orphan_control === "orphans"): echo ' checked="checked"'; endif;?>>
-</td>
-</tr>
-
-<tr valign="top">
-<th scope="row">Smart Quotes</th>
-<td>
-<?php
-$smart_quotes = esc_attr( get_option('smart_quotes'));
-?>
-<input type="checkbox" name="smart_quotes" value="quotes"<?php if ($smart_quotes === "quotes"): echo ' checked="checked"'; endif;?>>
-=======
 <input type="checkbox" name="orphan_control" value="orphan_control"<?php if ($orphan_control === "orphan_control"): echo ' checked="checked"'; endif;?>>
->>>>>>> Stashed changes
 </td>
 </tr>
 
@@ -150,18 +98,10 @@ add_filter( 'body_class','kemosite_typography_classes' );
 function kemosite_typography_classes( $classes ) {
  	
 	$activate_kemosite_typography = esc_attr( get_option('activate_kemosite_typography'));
-<<<<<<< Updated upstream
-	if ($activate_kemosite_typography === "typography"):
-
-		$classes[] = esc_attr( get_option('adaptive_font_size'));
-		$classes[] = $activate_kemosite_typography;
-		$classes[] = esc_attr( get_option('ideal_line_length_spacing'));
-=======
 	if ($activate_kemosite_typography === "activate_kemosite_typography"):
 
 		$classes[] = $activate_kemosite_typography;
 		$classes[] = esc_attr( get_option('adaptive_font_size'));
->>>>>>> Stashed changes
 		$classes[] = esc_attr( get_option('orphan_control'));
      
 	    return $classes;
@@ -172,14 +112,6 @@ function kemosite_typography_classes( $classes ) {
 
 function load_kemosite_typography_script() {
 
-<<<<<<< Updated upstream
-	wp_deregister_script('kemosite-typography');
-	wp_register_script('kemosite-typography', plugins_url('kemosite-typography.js', __FILE__), '', '4.8.1', 'true');
-	wp_enqueue_script('kemosite-typography');
-
-	// wp_add_inline_script( 'kemosite-typography', 'typography_obj.init(); console.log(typography_obj);' );
-
-=======
 	global $version;
 
 	$activate_kemosite_typography = esc_attr( get_option('activate_kemosite_typography'));
@@ -214,7 +146,6 @@ function load_kemosite_typography_script() {
     typography_obj.orphans_control();
     */
 
->>>>>>> Stashed changes
 }
 add_action('wp_enqueue_scripts', 'load_kemosite_typography_script');
 
