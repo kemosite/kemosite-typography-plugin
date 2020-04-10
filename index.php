@@ -17,7 +17,7 @@ Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseline for all devices. Version matches last tested Wordpress.
 Requires at least: 5.4
 Version: 5.4.0.1
-Requires PHP: 7.3.5
+Requires PHP: 7.2
 License: GNU General Public License v2 or later
 License URI: LICENSE
 Text Domain: kemosite-wordpress-theme
