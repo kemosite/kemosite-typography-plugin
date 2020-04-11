@@ -1,13 +1,13 @@
 /*
 Plugin Name: kemosite-typography-plugin
-Plugin URI: https://github.com/kemosite/kemosite-wordpress-theme
+Plugin URI: https://github.com/kemosite/kemosite-typography-plugin
 Github Plugin URI: https://github.com/kemosite/kemosite-typography-plugin
 Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseorphan_control_element for all devices. Version matches last tested Wordpress.
 Requires at least: 5.4
-Version: 5.4.0.1
-Requires PHP: 7.3.5
+Version: 5.4.0.5
+Requires PHP: 7.2
 License: GNU General Public License v2 or later
 License URI: LICENSE
 Text Domain: kemosite-wordpress-theme
@@ -249,13 +249,16 @@ var typography_obj = new function() {
 	     	"body.activate_kemosite_typography.orphan_control li"
 	     );
 
+	    console.log(orphan_control_elements);
+
 	    var punctuation = new Array("!", ".", ",", "?", ":", ";");
 
+	    
 	    for (var i = 0; i < orphan_control_elements.length; i++) {
 
 	    	var orphan_control_element = typography_obj.recursive_locate_text(orphan_control_elements[i]);
 	    	
-	    	if (orphan_control_element.childNodes && orphan_control_element.childNodes.length > 0 && orphan_control_element.childNodes[0].nodeValue !== null && orphan_control_element.childNodes[0].nodeValue.includes(" ")) {
+	    	if (orphan_control_element.childNodes && orphan_control_element.childNodes.length == 1 && orphan_control_element.childNodes[0].nodeValue !== null && orphan_control_element.childNodes[0].nodeValue.includes(" ")) {
 
 	    		var orphan_control_element_string = orphan_control_element.childNodes[0].nodeValue.toString();
 
@@ -298,6 +301,7 @@ var typography_obj = new function() {
 			}
 
 		}
+		
 
 	};
 
