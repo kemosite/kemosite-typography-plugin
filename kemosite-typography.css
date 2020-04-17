@@ -1,13 +1,1 @@
 @charset "utf-8";
-
-body.activate_kemosite_typography.orphan_control h1,
-body.activate_kemosite_typography.orphan_control h2,
-body.activate_kemosite_typography.orphan_control h3,
-body.activate_kemosite_typography.orphan_control h4,
-body.activate_kemosite_typography.orphan_control h5,
-body.activate_kemosite_typography.orphan_control h6,
-body.activate_kemosite_typography.orphan_control p,
-body.activate_kemosite_typography.orphan_control td,
-body.activate_kemosite_typography.orphan_control li {
-	max-width: 59ch;
-}

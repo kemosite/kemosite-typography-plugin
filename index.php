@@ -2,11 +2,11 @@
 
 defined( 'ABSPATH' ) or die();
 
-$version = '5.4.0.5';
+$version = '5.4.0.6';
 
 /**
  * @package kemosite-typography-plugin
- * @version 5.4.0.5
+ * @version 5.4.0.6
  */
 /*
 Plugin Name: kemosite-typography-plugin
@@ -16,7 +16,7 @@ Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseline for all devices.
 Requires at least: 5.4
-Version: 5.4.0.5
+Version: 5.4.0.6
 Requires PHP: 7.2
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -154,7 +154,7 @@ function load_kemosite_typography_css() {
 	echo '<link rel="stylesheet/less" type="text/css" href="' . plugins_url() . '/kemosite-typography-plugin/kemosite-typography.css" />' . "\n";
 	
 }
-add_action('wp_head', 'load_kemosite_typography_css');
+// add_action('wp_head', 'load_kemosite_typography_css');
 
 if ( !function_exists('is_user_logged_in') ) :
 /**
