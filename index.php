@@ -2,11 +2,11 @@
 
 defined( 'ABSPATH' ) or die();
 
-$version = '5.4.0.6';
+$version = '5.4.0.7';
 
 /**
  * @package kemosite-typography-plugin
- * @version 5.4.0.6
+ * @version 5.4.0.7
  */
 /*
 Plugin Name: kemosite-typography-plugin
@@ -16,7 +16,7 @@ Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseline for all devices.
 Requires at least: 5.4
-Version: 5.4.0.6
+Version: 5.4.0.7
 Requires PHP: 7.2
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -132,8 +132,11 @@ function load_kemosite_typography_script() {
 			document.addEventListener("DOMContentLoaded", function() {
 				typography_obj.init(); 
 				typography_obj.activate_kemosite_typography();
+				if (Chart.defaults.global && typography_obj.outputs.font_height_pixels_min > 12) {
+					Chart.defaults.global.defaultFontSize = typography_obj.outputs.font_height_pixels_min;
+				}
 			});
-		');
+		'); // Now supports presense of Chart JS!
 
 		if ($orphan_control === 'orphan_control'):
 			wp_add_inline_script( 'activate_kemosite_typography', 'document.addEventListener("DOMContentLoaded", function() { typography_obj.orphans_control(); });');

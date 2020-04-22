@@ -6,7 +6,7 @@ Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseorphan_control_element for all devices. Version matches last tested Wordpress.
 Requires at least: 5.4
-Version: 5.4.0.6
+Version: 5.4.0.7
 Requires PHP: 7.2
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -250,7 +250,7 @@ var typography_obj = new function() {
 	     	"body.activate_kemosite_typography.orphan_control li"
 	     );
 
-	    console.log(orphan_control_elements);
+	    // console.log(orphan_control_elements);
 
 	    var punctuation = new Array("!", ".", ",", "?", ":", ";");
 
