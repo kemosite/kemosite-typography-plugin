@@ -6,8 +6,8 @@ Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseorphan_control_element for all devices. Version matches last tested Wordpress.
 Requires at least: 5.4
-Version: 5.4.0.7
-Requires PHP: 7.2
+Version: 5.4.1.1
+Requires PHP: 7.3
 License: GNU General Public License v2 or later
 License URI: LICENSE
 Text Domain: kemosite-wordpress-theme
@@ -80,12 +80,24 @@ var typography_obj = new function() {
 	this.outputs = {
 
 		/* [Values that will be used in the resulting CSS] */
-		font_height_pixels_min: "",
-		font_height_pixels_avg: "",
-		font_height_pixels_max: "",
-		font_height_em_min: "",
-		font_height_em_avg: "",
-		font_height_em_max: "",
+		font_height_pixels_100: "",
+		font_height_pixels_200: "",
+		font_height_pixels_300: "",
+		font_height_pixels_400: "",
+		font_height_pixels_500: "",
+		font_height_pixels_600: "",
+		font_height_pixels_700: "",
+		font_height_pixels_800: "",
+		font_height_pixels_900: "",
+		font_height_em_100: "",
+		font_height_em_200: "",
+		font_height_em_300: "",
+		font_height_em_400: "",
+		font_height_em_500: "",
+		font_height_em_600: "",
+		font_height_em_700: "",
+		font_height_em_800: "",
+		font_height_em_900: "",
 		font_size_adjust: "",
 
 	};
@@ -113,6 +125,7 @@ var typography_obj = new function() {
 		typography_obj.user_configuration.ex_height_pixels = Math.max(user_properties_obj.scrollHeight, user_properties_obj.offsetHeight, user_properties_obj.clientHeight);
 
 	    /* [Remove testing object] */
+	    // console.log(user_properties_obj);
 	    document.getElementsByTagName("body")[0].removeChild(user_properties_obj);
 
 	    /* [User configuration calculations] */
@@ -153,19 +166,45 @@ var typography_obj = new function() {
 	    typography_obj.parameters.letter_diameter_pixels_avg = Math.round((typography_obj.parameters.final_foveal_vision_pixels_avg / 4.5) / typography_obj.parameters.font_height_ratio);
 	    typography_obj.parameters.letter_diameter_pixels_max = Math.round((typography_obj.parameters.final_foveal_vision_pixels_max / 4.5) / typography_obj.parameters.font_height_ratio);
 
+	    var letter_diameter_pixels_array = [];
+	    var i = 0;
+	    letter_diameter_pixels_array[i++] = Math.round((typography_obj.parameters.final_foveal_vision_pixels_min / 4) / typography_obj.parameters.font_height_ratio);
+	    letter_diameter_pixels_array[i++] = Math.round((typography_obj.parameters.final_foveal_vision_pixels_avg / 4) / typography_obj.parameters.font_height_ratio);
+	    letter_diameter_pixels_array[i++] = Math.round((typography_obj.parameters.final_foveal_vision_pixels_max / 4) / typography_obj.parameters.font_height_ratio);
+	    letter_diameter_pixels_array[i++] = Math.round((typography_obj.parameters.final_foveal_vision_pixels_min / 4.5) / typography_obj.parameters.font_height_ratio);
+	    letter_diameter_pixels_array[i++] = Math.round((typography_obj.parameters.final_foveal_vision_pixels_avg / 4.5) / typography_obj.parameters.font_height_ratio);
+	    letter_diameter_pixels_array[i++] = Math.round((typography_obj.parameters.final_foveal_vision_pixels_max / 4.5) / typography_obj.parameters.font_height_ratio);
+	    letter_diameter_pixels_array[i++] = Math.round((typography_obj.parameters.final_foveal_vision_pixels_min / 5) / typography_obj.parameters.font_height_ratio);
+	    letter_diameter_pixels_array[i++] = Math.round((typography_obj.parameters.final_foveal_vision_pixels_avg / 5) / typography_obj.parameters.font_height_ratio);
+	    letter_diameter_pixels_array[i++] = Math.round((typography_obj.parameters.final_foveal_vision_pixels_max / 5) / typography_obj.parameters.font_height_ratio);
+	    letter_diameter_pixels_array.sort();
+	    // console.log(letter_diameter_pixels_array);
+
 	    /** 
 	     * [Outputs calculations] 
 	     **/
 
 	    /* [Font height pixels] */
-	    typography_obj.outputs.font_height_pixels_min = Math.min(typography_obj.parameters.letter_diameter_pixels_min, typography_obj.user_configuration.font_height_pixels); // The smaller of the users setting, or the minimum setting.
-	    typography_obj.outputs.font_height_pixels_avg = Math.max(typography_obj.parameters.letter_diameter_pixels_avg, typography_obj.user_configuration.font_height_pixels); // The larger of the users setting, or the average setting.
-	    typography_obj.outputs.font_height_pixels_max = Math.max(typography_obj.parameters.letter_diameter_pixels_max, typography_obj.user_configuration.font_height_pixels); // The larger of the users setting, or the maximum setting.
+	    typography_obj.outputs.font_height_pixels_100 = Math.min(letter_diameter_pixels_array[0], typography_obj.user_configuration.font_height_pixels);
+	    typography_obj.outputs.font_height_pixels_200 = Math.max(letter_diameter_pixels_array[1], typography_obj.user_configuration.font_height_pixels);
+	    typography_obj.outputs.font_height_pixels_300 = Math.max(letter_diameter_pixels_array[2], typography_obj.user_configuration.font_height_pixels);
+	    typography_obj.outputs.font_height_pixels_400 = Math.min(letter_diameter_pixels_array[3], typography_obj.user_configuration.font_height_pixels);
+	    typography_obj.outputs.font_height_pixels_500 = Math.max(letter_diameter_pixels_array[4], typography_obj.user_configuration.font_height_pixels);
+	    typography_obj.outputs.font_height_pixels_600 = Math.max(letter_diameter_pixels_array[5], typography_obj.user_configuration.font_height_pixels);
+	    typography_obj.outputs.font_height_pixels_700 = Math.min(letter_diameter_pixels_array[6], typography_obj.user_configuration.font_height_pixels);
+	    typography_obj.outputs.font_height_pixels_800 = Math.max(letter_diameter_pixels_array[7], typography_obj.user_configuration.font_height_pixels);
+	    typography_obj.outputs.font_height_pixels_900 = Math.max(letter_diameter_pixels_array[8], typography_obj.user_configuration.font_height_pixels);
 
 	    /* [Calculate height using em measure.] */
-	    typography_obj.outputs.font_height_em_min = Math.round((typography_obj.outputs.font_height_pixels_min / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
-	    typography_obj.outputs.font_height_em_avg = Math.round((typography_obj.outputs.font_height_pixels_avg / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
-	    typography_obj.outputs.font_height_em_max = Math.round((typography_obj.outputs.font_height_pixels_max / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
+	    typography_obj.outputs.font_height_em_100 = Math.round((typography_obj.outputs.font_height_pixels_100 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
+	    typography_obj.outputs.font_height_em_200 = Math.round((typography_obj.outputs.font_height_pixels_200 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
+	    typography_obj.outputs.font_height_em_300 = Math.round((typography_obj.outputs.font_height_pixels_300 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
+	    typography_obj.outputs.font_height_em_400 = Math.round((typography_obj.outputs.font_height_pixels_400 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
+	    typography_obj.outputs.font_height_em_500 = Math.round((typography_obj.outputs.font_height_pixels_500 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
+	    typography_obj.outputs.font_height_em_600 = Math.round((typography_obj.outputs.font_height_pixels_600 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
+	    typography_obj.outputs.font_height_em_700 = Math.round((typography_obj.outputs.font_height_pixels_700 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
+	    typography_obj.outputs.font_height_em_800 = Math.round((typography_obj.outputs.font_height_pixels_800 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
+	    typography_obj.outputs.font_height_em_900 = Math.round((typography_obj.outputs.font_height_pixels_900 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
 
 	    /* [Font Size Adjust] */
 	    typography_obj.outputs.font_size_adjust = typography_obj.parameters.font_height_ratio;
@@ -187,17 +226,35 @@ var typography_obj = new function() {
 		var typography_css = document.createElement('style');
 		typography_css.setAttribute("type", "text/css");
 
-		var typography_body_size = "body.small.activate_kemosite_typography { "+
-		"font-size: "+typography_obj.outputs.font_height_em_min+"em; "+
+		var typography_body_size = "body._100.activate_kemosite_typography { "+
+			"font-size: "+typography_obj.outputs.font_height_em_100+"em; "+
 		"} " +
-		"body.average.activate_kemosite_typography { "+
-		"font-size: "+typography_obj.outputs.font_height_em_avg+"em; "+
+		"body._200.activate_kemosite_typography { "+
+			"font-size: "+typography_obj.outputs.font_height_em_200+"em; "+
 		"} " +
-		"body.large.activate_kemosite_typography { "+
-		"font-size: "+typography_obj.outputs.font_height_em_max+"em; "+
+		"body._300.activate_kemosite_typography { "+
+			"font-size: "+typography_obj.outputs.font_height_em_300+"em; "+
+		"} " +
+		"body._400.activate_kemosite_typography { "+
+			"font-size: "+typography_obj.outputs.font_height_em_400+"em; "+
+		"} " +
+		"body._500.activate_kemosite_typography { "+
+			"font-size: "+typography_obj.outputs.font_height_em_500+"em; "+
+		"} " +
+		"body._600.activate_kemosite_typography { "+
+			"font-size: "+typography_obj.outputs.font_height_em_600+"em; "+
+		"} " +
+		"body._700.activate_kemosite_typography { "+
+			"font-size: "+typography_obj.outputs.font_height_em_700+"em; "+
+		"} " +
+		"body._800.activate_kemosite_typography { "+
+			"font-size: "+typography_obj.outputs.font_height_em_800+"em; "+
+		"} " +
+		"body._900.activate_kemosite_typography { "+
+			"font-size: "+typography_obj.outputs.font_height_em_900+"em; "+
 		"} " +
 		"body.activate_kemosite_typography { "+
-		"font-size: "+typography_obj.outputs.font_height_em_avg+"em; "+
+			"font-size: "+typography_obj.outputs.font_height_em_500+"em; "+
 		"} ";
 
 		if (typography_css.styleSheet) {
@@ -213,9 +270,6 @@ var typography_obj = new function() {
 	};
 
 	this.recursive_locate_text = function(node) {
-
-		// console.log("Examine Node");
-		// console.log(node);
 		
 		if (node.childNodes && node.childNodes.length > 0 && node.childNodes[0].nodeName !== "#text") {
 			return typography_obj.recursive_locate_text(node.childNodes[0]);
@@ -228,7 +282,6 @@ var typography_obj = new function() {
 
 		// We've got nuthin'.
 		else {
-			// console.log("Not sure what to make of this.");
 			return node;
 		}		
 
@@ -249,8 +302,6 @@ var typography_obj = new function() {
 	     	"body.activate_kemosite_typography.orphan_control figcaption," +
 	     	"body.activate_kemosite_typography.orphan_control li"
 	     );
-
-	    // console.log(orphan_control_elements);
 
 	    var punctuation = new Array("!", ".", ",", "?", ":", ";");
 
