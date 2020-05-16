@@ -6,7 +6,7 @@ Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseorphan_control_element for all devices. Version matches last tested Wordpress.
 Requires at least: 5.4
-Version: 5.4.1.1
+Version: 5.4.1.2
 Requires PHP: 7.3
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -178,22 +178,21 @@ var typography_obj = new function() {
 	    letter_diameter_pixels_array[i++] = Math.round((typography_obj.parameters.final_foveal_vision_pixels_avg / 5) / typography_obj.parameters.font_height_ratio);
 	    letter_diameter_pixels_array[i++] = Math.round((typography_obj.parameters.final_foveal_vision_pixels_max / 5) / typography_obj.parameters.font_height_ratio);
 	    letter_diameter_pixels_array.sort();
-	    // console.log(letter_diameter_pixels_array);
 
 	    /** 
 	     * [Outputs calculations] 
 	     **/
 
 	    /* [Font height pixels] */
-	    typography_obj.outputs.font_height_pixels_100 = Math.min(letter_diameter_pixels_array[0], typography_obj.user_configuration.font_height_pixels);
-	    typography_obj.outputs.font_height_pixels_200 = Math.max(letter_diameter_pixels_array[1], typography_obj.user_configuration.font_height_pixels);
-	    typography_obj.outputs.font_height_pixels_300 = Math.max(letter_diameter_pixels_array[2], typography_obj.user_configuration.font_height_pixels);
-	    typography_obj.outputs.font_height_pixels_400 = Math.min(letter_diameter_pixels_array[3], typography_obj.user_configuration.font_height_pixels);
-	    typography_obj.outputs.font_height_pixels_500 = Math.max(letter_diameter_pixels_array[4], typography_obj.user_configuration.font_height_pixels);
-	    typography_obj.outputs.font_height_pixels_600 = Math.max(letter_diameter_pixels_array[5], typography_obj.user_configuration.font_height_pixels);
-	    typography_obj.outputs.font_height_pixels_700 = Math.min(letter_diameter_pixels_array[6], typography_obj.user_configuration.font_height_pixels);
-	    typography_obj.outputs.font_height_pixels_800 = Math.max(letter_diameter_pixels_array[7], typography_obj.user_configuration.font_height_pixels);
-	    typography_obj.outputs.font_height_pixels_900 = Math.max(letter_diameter_pixels_array[8], typography_obj.user_configuration.font_height_pixels);
+	    typography_obj.outputs.font_height_pixels_100 = Math.max(letter_diameter_pixels_array[0], typography_obj.user_configuration.font_height_pixels);
+	    typography_obj.outputs.font_height_pixels_200 = Math.max(typography_obj.outputs.font_height_pixels_100 + 1, letter_diameter_pixels_array[1], typography_obj.user_configuration.font_height_pixels);
+	    typography_obj.outputs.font_height_pixels_300 = Math.max(typography_obj.outputs.font_height_pixels_200 + 1, letter_diameter_pixels_array[2], typography_obj.user_configuration.font_height_pixels);
+	    typography_obj.outputs.font_height_pixels_400 = Math.max(typography_obj.outputs.font_height_pixels_300 + 1, letter_diameter_pixels_array[3], typography_obj.user_configuration.font_height_pixels);
+	    typography_obj.outputs.font_height_pixels_500 = Math.max(typography_obj.outputs.font_height_pixels_400 + 1, letter_diameter_pixels_array[4], typography_obj.user_configuration.font_height_pixels);
+	    typography_obj.outputs.font_height_pixels_600 = Math.max(typography_obj.outputs.font_height_pixels_500 + 1, letter_diameter_pixels_array[5], typography_obj.user_configuration.font_height_pixels);
+	    typography_obj.outputs.font_height_pixels_700 = Math.max(typography_obj.outputs.font_height_pixels_600 + 1, letter_diameter_pixels_array[6], typography_obj.user_configuration.font_height_pixels);
+	    typography_obj.outputs.font_height_pixels_800 = Math.max(typography_obj.outputs.font_height_pixels_700 + 1, letter_diameter_pixels_array[7], typography_obj.user_configuration.font_height_pixels);
+	    typography_obj.outputs.font_height_pixels_900 = Math.max(typography_obj.outputs.font_height_pixels_800 + 1, letter_diameter_pixels_array[8], typography_obj.user_configuration.font_height_pixels);
 
 	    /* [Calculate height using em measure.] */
 	    typography_obj.outputs.font_height_em_100 = Math.round((typography_obj.outputs.font_height_pixels_100 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
