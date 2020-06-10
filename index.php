@@ -2,11 +2,11 @@
 
 defined( 'ABSPATH' ) or die();
 
-$version = '5.4.1.2';
+$version = '5.4.1.3';
 
 /**
  * @package kemosite-typography-plugin
- * @version 5.4.1.2
+ * @version 5.4.1.3
  */
 /*
 Plugin Name: kemosite-typography-plugin
@@ -16,7 +16,7 @@ Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseline for all devices.
 Requires at least: 5.4
-Version: 5.4.1.2
+Version: 5.4.1.3
 Requires PHP: 7.3
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -100,7 +100,10 @@ $orphan_control = esc_attr( get_option('orphan_control'));
 </div>
 <?php }
 
-add_filter( 'body_class','kemosite_typography_classes' );
+$activate_kemosite_typography = esc_attr( get_option('activate_kemosite_typography'));
+if ($activate_kemosite_typography === "activate_kemosite_typography"):
+	add_filter( 'body_class','kemosite_typography_classes' );
+endif;
 function kemosite_typography_classes( $classes ) {
  	
 	$activate_kemosite_typography = esc_attr( get_option('activate_kemosite_typography'));
@@ -124,7 +127,7 @@ function load_kemosite_typography_script() {
 	$orphan_control = esc_attr( get_option('orphan_control'));
 
 	wp_deregister_script('kemosite-typography');
-	wp_register_script('kemosite-typography', plugins_url('kemosite-typography.js', __FILE__), '', $version);
+	wp_register_script('kemosite-typography', plugins_url('kemosite-typography.min.js', __FILE__), '', $version);
 	wp_enqueue_script('kemosite-typography');
 
 	wp_deregister_script('activate_kemosite_typography');
@@ -160,10 +163,10 @@ add_action('wp_enqueue_scripts', 'load_kemosite_typography_script');
 
 function load_kemosite_typography_css() {
 	
-	echo '<link rel="stylesheet/less" type="text/css" href="' . plugins_url() . '/kemosite-typography-plugin/kemosite-typography.css" />' . "\n";
+	echo '<link rel="stylesheet" type="text/css" href="' . plugins_url() . '/kemosite-typography-plugin/kemosite-typography.min.css" />' . "\n";
 	
 }
-// add_action('wp_head', 'load_kemosite_typography_css');
+add_action('wp_head', 'load_kemosite_typography_css');
 
 if ( !function_exists('is_user_logged_in') ) :
 /**
