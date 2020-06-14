@@ -1,9 +1,9 @@
-# kemosite-typography-plugin 5.4.1.3
+# kemosite-typography-plugin 5.4.2.1
 ## A useful typography plug-in for Wordpress 5.4
 
 Contributors: Kevin Montgomery
 Requires at least: 5.4
-Tested up to: 5.4.1
+Tested up to: 5.4.2
 Requires PHP: 7.3
 License: GNU General Public License v2 or later
 License URI: LICENSE
