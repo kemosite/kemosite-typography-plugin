@@ -5,19 +5,18 @@
 	--kemosite-typography-column-gap: 1rem;
 }
 
+body.activate_kemosite_typography h1,
+body.activate_kemosite_typography h2,
+body.activate_kemosite_typography h3,
+body.activate_kemosite_typography h4,
+body.activate_kemosite_typography h5,
+body.activate_kemosite_typography h6, {
+	column-span: all;
+}
+
 @media screen and (max-width: 39ch) {
 
-	body.activate_kemosite_typography h1,
-	body.activate_kemosite_typography h2,
-	body.activate_kemosite_typography h3,
-	body.activate_kemosite_typography h4,
-	body.activate_kemosite_typography h5,
-	body.activate_kemosite_typography h6,
-	body.activate_kemosite_typography p,
-	body.activate_kemosite_typography ol,
-	body.activate_kemosite_typography ul,
-	body.activate_kemosite_typography blockquote,
-	body.activate_kemosite_typography figcaption {
+	body.activate_kemosite_typography .page {
 		columns: auto 1;
 		margin: var(--kemosite-typography-column-margin);
 		column-gap: var(--kemosite-typography-column-gap);
@@ -37,25 +36,6 @@
 
 @media screen and (min-width: 39ch) and (max-width: 59ch) {
 
-	/*
-	body.activate_kemosite_typography h1,
-	body.activate_kemosite_typography h2,
-	body.activate_kemosite_typography h3,
-	body.activate_kemosite_typography h4,
-	body.activate_kemosite_typography h5,
-	body.activate_kemosite_typography h6,
-	*/
-	body.activate_kemosite_typography p,
-	body.activate_kemosite_typography ol,
-	body.activate_kemosite_typography ul,
-	body.activate_kemosite_typography blockquote,
-	body.activate_kemosite_typography figcaption {
-		columns: 39rem auto;
-		columns: 39ch auto;
-		margin: var(--kemosite-typography-column-margin);
-		column-gap: var(--kemosite-typography-column-gap);
-	}
-
 	body.activate_kemosite_typography select,
 	body.activate_kemosite_typography textarea,
 	body.activate_kemosite_typography img, 
@@ -63,33 +43,24 @@
 	body.activate_kemosite_typography td,
 	body.activate_kemosite_typography hr,
 	body.activate_kemosite_typography li {
-		max-width: 39rem;
 		max-width: 39ch;
+	}
+
+}
+
+
+@media screen and (min-width: 39ch) and (max-width: 59ch) and (min-height: 39ch) {
+
+	body.activate_kemosite_typography .page {
+		columns: 39ch auto;
+		margin: var(--kemosite-typography-column-margin);
+		column-gap: var(--kemosite-typography-column-gap);
 	}
 
 }
 
 @media screen and (min-width: 59ch) {
 
-	/*
-	body.activate_kemosite_typography h1,
-	body.activate_kemosite_typography h2,
-	body.activate_kemosite_typography h3,
-	body.activate_kemosite_typography h4,
-	body.activate_kemosite_typography h5,
-	body.activate_kemosite_typography h6,
-	*/
-	body.activate_kemosite_typography p,
-	body.activate_kemosite_typography ol,
-	body.activate_kemosite_typography ul,
-	body.activate_kemosite_typography blockquote,
-	body.activate_kemosite_typography figcaption {
-		columns: 59rem auto;
-		columns: 59ch auto;
-		margin: var(--kemosite-typography-column-margin);
-		column-gap: var(--kemosite-typography-column-gap);
-	}
-
 	body.activate_kemosite_typography select,
 	body.activate_kemosite_typography textarea,
 	body.activate_kemosite_typography img, 
@@ -97,8 +68,17 @@
 	body.activate_kemosite_typography td,
 	body.activate_kemosite_typography hr,
 	body.activate_kemosite_typography li {
-		max-width: 59rem;
 		max-width: 59ch;
+	}
+
+}
+
+@media screen and (min-width: 59ch) and (min-height: 59ch) {
+
+	body.activate_kemosite_typography .page {
+		columns: 59ch auto;
+		margin: var(--kemosite-typography-column-margin);
+		column-gap: var(--kemosite-typography-column-gap);
 	}
 
 }

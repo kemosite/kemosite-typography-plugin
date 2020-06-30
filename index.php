@@ -2,11 +2,11 @@
 
 defined( 'ABSPATH' ) or die();
 
-$version = '5.4.2.2';
+$version = '5.4.2.3';
 
 /**
  * @package kemosite-typography-plugin
- * @version 5.4.2.1
+ * @version 5.4.2.3
  */
 /*
 Plugin Name: kemosite-typography-plugin
@@ -16,7 +16,7 @@ Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseline for all devices.
 Requires at least: 5.4
-Version: 5.4.2.2
+Version: 5.4.2.3
 Requires PHP: 7.3
 License: GNU General Public License v2 or later
 License URI: LICENSE
