@@ -1,4 +1,4 @@
-# kemosite-typography-plugin 5.4.2.3
+# kemosite-typography-plugin 5.4.2.4
 ## A useful typography plug-in for Wordpress 5.4
 
 Contributors: Kevin Montgomery
