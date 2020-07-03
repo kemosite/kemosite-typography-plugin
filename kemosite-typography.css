@@ -12,6 +12,20 @@ body.activate_kemosite_typography h4,
 body.activate_kemosite_typography h5,
 body.activate_kemosite_typography h6, {
 	column-span: all;
+	widows: 2;
+	orphans: 2;
+}
+
+body.activate_kemosite_typography :not(#wpadminbar) select,
+body.activate_kemosite_typography :not(#wpadminbar) textarea,
+body.activate_kemosite_typography :not(#wpadminbar) img, 
+body.activate_kemosite_typography :not(#wpadminbar) table,
+body.activate_kemosite_typography :not(#wpadminbar) td,
+body.activate_kemosite_typography :not(#wpadminbar) hr,
+body.activate_kemosite_typography :not(#wpadminbar) li,
+body.activate_kemosite_typography :not(#wpadminbar) p {
+	orphans: 2;
+	widows: 2;
 }
 
 @media screen and (max-width: 39ch) {
@@ -29,7 +43,8 @@ body.activate_kemosite_typography h6, {
 	body.activate_kemosite_typography :not(#wpadminbar) table,
 	body.activate_kemosite_typography :not(#wpadminbar) td,
 	body.activate_kemosite_typography :not(#wpadminbar) hr,
-	body.activate_kemosite_typography :not(#wpadminbar) li {
+	body.activate_kemosite_typography :not(#wpadminbar) li,
+	body.activate_kemosite_typography :not(#wpadminbar) p {
 		max-width: 100%;
 	}
 
@@ -43,7 +58,8 @@ body.activate_kemosite_typography h6, {
 	body.activate_kemosite_typography :not(#wpadminbar) table,
 	body.activate_kemosite_typography :not(#wpadminbar) td,
 	body.activate_kemosite_typography :not(#wpadminbar) hr,
-	body.activate_kemosite_typography :not(#wpadminbar) li {
+	body.activate_kemosite_typography :not(#wpadminbar) li,
+	body.activate_kemosite_typography :not(#wpadminbar) p {
 		max-width: 39ch;
 	}
 
@@ -69,7 +85,8 @@ body.activate_kemosite_typography h6, {
 	body.activate_kemosite_typography :not(#wpadminbar) table,
 	body.activate_kemosite_typography :not(#wpadminbar) td,
 	body.activate_kemosite_typography :not(#wpadminbar) hr,
-	body.activate_kemosite_typography :not(#wpadminbar) li {
+	body.activate_kemosite_typography :not(#wpadminbar) li,
+	body.activate_kemosite_typography :not(#wpadminbar) p {
 		max-width: 59ch;
 	}
 
