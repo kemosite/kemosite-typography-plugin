@@ -2,11 +2,11 @@
 
 defined( 'ABSPATH' ) or die();
 
-$version = '5.4.2.5';
+$version = '5.4.2.6';
 
 /**
  * @package kemosite-typography-plugin
- * @version 5.4.2.5
+ * @version 5.4.2.6
  */
 /*
 Plugin Name: kemosite-typography-plugin
@@ -16,7 +16,7 @@ Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseline for all devices.
 Requires at least: 5.4
-Version: 5.4.2.5
+Version: 5.4.2.6
 Requires PHP: 7.3
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -167,6 +167,28 @@ function load_kemosite_typography_css() {
 	
 }
 add_action('wp_head', 'load_kemosite_typography_css');
+
+
+/**
+ * Remove columns if override found in post meta
+ */
+if ( null !== get_post_meta(get_the_ID(), 'kemosite_typography_remove_columns') ):
+	add_filter( 'body_class','kemosite_typography_remove_columns' );
+endif;
+function kemosite_typography_remove_columns( $classes ) {
+
+	$kemosite_typography_remove_columns = get_post_meta(get_the_ID(), 'kemosite_typography_remove_columns');
+	$kemosite_typography_remove_columns = $kemosite_typography_remove_columns[0];
+
+	if ($kemosite_typography_remove_columns == 'true'):
+
+		$classes[] = 'kemosite_typography_remove_columns';
+
+	endif;
+     
+    return $classes;
+     
+}
 
 if ( !function_exists('is_user_logged_in') ) :
 /**

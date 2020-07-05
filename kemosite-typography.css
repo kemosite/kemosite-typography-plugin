@@ -102,3 +102,10 @@ body.activate_kemosite_typography :not(#wpadminbar) p {
 	}
 
 }
+
+body.activate_kemosite_typography.kemosite_typography_remove_columns .page,
+body.activate_kemosite_typography.kemosite_typography_remove_columns .single {
+	columns: 1;
+	margin: var(--kemosite-typography-column-margin);
+	column-gap: var(--kemosite-typography-column-gap);
+}
