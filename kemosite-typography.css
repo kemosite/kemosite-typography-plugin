@@ -10,7 +10,7 @@ body.activate_kemosite_typography h2,
 body.activate_kemosite_typography h3,
 body.activate_kemosite_typography h4,
 body.activate_kemosite_typography h5,
-body.activate_kemosite_typography h6, {
+body.activate_kemosite_typography h6 {
 	column-span: all;
 	widows: 2;
 	orphans: 2;
