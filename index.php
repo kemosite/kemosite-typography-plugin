@@ -2,11 +2,11 @@
 
 defined( 'ABSPATH' ) or die();
 
-$version = '5.4.2.7';
+$version = '5.4.2.8';
 
 /**
  * @package kemosite-typography-plugin
- * @version 5.4.2.7
+ * @version 5.4.2.8
  */
 /*
 Plugin Name: kemosite-typography-plugin
@@ -16,7 +16,7 @@ Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseline for all devices.
 Requires at least: 5.4
-Version: 5.4.2.7
+Version: 5.4.2.8
 Requires PHP: 7.3
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -128,6 +128,7 @@ function load_kemosite_typography_script() {
 
 	wp_deregister_script('kemosite-typography');
 	wp_register_script('kemosite-typography', plugins_url('kemosite-typography.min.js', __FILE__), '', $version);
+	//wp_register_script('kemosite-typography', plugins_url('kemosite-typography.js', __FILE__), '', $version);
 	wp_enqueue_script('kemosite-typography');
 
 	wp_deregister_script('activate_kemosite_typography');
@@ -164,6 +165,7 @@ add_action('wp_enqueue_scripts', 'load_kemosite_typography_script');
 function load_kemosite_typography_css() {
 	
 	echo '<link rel="stylesheet" type="text/css" href="' . plugins_url() . '/kemosite-typography-plugin/kemosite-typography.min.css" />' . "\n";
+	// echo '<link rel="stylesheet" type="text/css" href="' . plugins_url() . '/kemosite-typography-plugin/kemosite-typography.css" />' . "\n";
 	
 }
 add_action('wp_head', 'load_kemosite_typography_css');
@@ -178,12 +180,18 @@ endif;
 function kemosite_typography_remove_columns( $classes ) {
 
 	$kemosite_typography_remove_columns = get_post_meta(get_the_ID(), 'kemosite_typography_remove_columns');
-	$kemosite_typography_remove_columns = $kemosite_typography_remove_columns[0];
 
+	/*
+	echo "<pre>";
+	print_r($kemosite_typography_remove_columns);
+	echo "</pre>";
+	*/
+
+	if (isset($kemosite_typography_remove_columns[0]) && $kemosite_typography_remove_columns[0] != null):
+		$kemosite_typography_remove_columns = $kemosite_typography_remove_columns[0];
+	endif;
 	if ($kemosite_typography_remove_columns == 'true'):
-
 		$classes[] = 'kemosite_typography_remove_columns';
-
 	endif;
      
     return $classes;
