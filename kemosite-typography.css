@@ -23,7 +23,8 @@ body.activate_kemosite_typography h6 {
 
 body.activate_kemosite_typography button,
 body.activate_kemosite_typography .button,
-body.activate_kemosite_typography .wp-block-button {
+body.activate_kemosite_typography .wp-block-button,
+body.activate_kemosite_typography nav {
 	column-span: all;
 	margin-top: 1ex;
 	margin-bottom: 1ex;
