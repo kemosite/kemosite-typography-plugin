@@ -288,7 +288,12 @@ var typography_obj = new function() {
 
 	this.orphans_control = function() {
 
-		// Execute if screen width > 39ch
+		/*
+		Scan for sentences first.
+		Count words in sentence.
+		If words <= 3, don't apply orphan control.
+		Only apply if screen width > 39ch
+		*/
 
 	    /* [Locate elements for typesetter] */
 	    var orphan_control_elements = document.querySelectorAll(
@@ -306,7 +311,6 @@ var typography_obj = new function() {
 
 	    var punctuation = new Array("!", ".", ",", "?", ":", ";");
 
-	    
 	    for (var i = 0; i < orphan_control_elements.length; i++) {
 
 	    	var orphan_control_element = typography_obj.recursive_locate_text(orphan_control_elements[i]);
@@ -315,41 +319,51 @@ var typography_obj = new function() {
 
 	    		var orphan_control_element_string = orphan_control_element.childNodes[0].nodeValue.toString();
 
+	    		/*
+	    		https://www.geeksforgeeks.org/javascript-split-a-string-with-multiple-separators/
+	    		var sentence_array = orphan_control_element_string.split(punctuation);
+	    		console.log(sentence_array);
+	    		*/
+
 				/* [Apply orphan control] */
 		    	var word_array = orphan_control_element_string.split(" ");
 		    	
-		    	for (var ii = 0; ii < word_array.length - 2; ii++) { // Look at each word for punctuation
+		    	if (word_array.length > 3) {
 
-		    		var word = word_array[ii];
-					var evaluate_punctuation = word.substring(word.length - 1, word.length);
+			    	for (var ii = 0; ii < word_array.length - 2; ii++) { // Look at each word for punctuation
 
-		    		/*
-		    		 * If punctuation is found, apply non-breaking spaces to the preceding and following words.
-		    		 */
-		    		
-		    		if (ii > 0 && punctuation.indexOf(evaluate_punctuation) > 0) {
-		    			var preceding_words =  new Array(word_array[ii - 1], word);
-		    			var preceding_words_join = preceding_words.join("&nbsp;");
-		    			word_array.splice(ii - 1, 2, preceding_words_join);
-		    			ii--;
+			    		var word = word_array[ii];
+						var evaluate_punctuation = word.substring(word.length - 1, word.length);
 
-		    			var following_words =  new Array(word_array[ii + 1], word_array[ii + 2]);
-		    			var following_words_join = following_words.join("&nbsp;");
-		    			word_array.splice(ii + 1, 2, following_words_join);
+			    		/*
+			    		 * If punctuation is found, apply non-breaking spaces to the preceding and following words.
+			    		 */
+			    		
+			    		if (ii > 0 && punctuation.indexOf(evaluate_punctuation) > 0) {
+			    			var preceding_words =  new Array(word_array[ii - 1], word);
+			    			var preceding_words_join = preceding_words.join("&nbsp;");
+			    			word_array.splice(ii - 1, 2, preceding_words_join);
+			    			ii--;
 
-		    		}
-		    		
-		    	}
+			    			var following_words =  new Array(word_array[ii + 1], word_array[ii + 2]);
+			    			var following_words_join = following_words.join("&nbsp;");
+			    			word_array.splice(ii + 1, 2, following_words_join);
 
-		    	var last_words =  word_array.splice(-2);
-		    	var last_words_join = last_words.join("&nbsp;");
-				word_array.push(last_words_join);
+			    		}
+			    		
+			    	}
 
-				orphan_control_element_string = word_array.join(" ");
-				orphan_control_element.innerHTML = orphan_control_element_string;
+			    	var last_words =  word_array.splice(-2);
+			    	var last_words_join = last_words.join("&nbsp;");
+					word_array.push(last_words_join);
 
-				orphan_control_element_string = "";
-				word_array = "";
+					orphan_control_element_string = word_array.join(" ");
+					orphan_control_element.innerHTML = orphan_control_element_string;
+
+					orphan_control_element_string = "";
+					word_array = "";
+
+				}
 
 			}
 
