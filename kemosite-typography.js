@@ -6,7 +6,7 @@ Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseorphan_control_element for all devices. Version matches last tested Wordpress.
 Requires at least: 5.4
-Version: 5.4.2.9
+Version: 5.4.2.11
 Requires PHP: 7.3
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -295,80 +295,97 @@ var typography_obj = new function() {
 		Only apply if screen width > 39ch
 		*/
 
-	    /* [Locate elements for typesetter] */
-	    var orphan_control_elements = document.querySelectorAll(
-	     	"body.activate_kemosite_typography.orphan_control h1, "+
-	     	"body.activate_kemosite_typography.orphan_control h2, "+
-	     	"body.activate_kemosite_typography.orphan_control h3, "+
-	     	"body.activate_kemosite_typography.orphan_control h4, "+
-	     	"body.activate_kemosite_typography.orphan_control h5, "+
-	     	"body.activate_kemosite_typography.orphan_control h6, "+
-	     	"body.activate_kemosite_typography.orphan_control p," +
-	     	"body.activate_kemosite_typography.orphan_control td," +
-	     	"body.activate_kemosite_typography.orphan_control figcaption," +
-	     	"body.activate_kemosite_typography.orphan_control li"
-	     );
+		if (window.matchMedia("(min-width: 39ch)").matches) {
 
-	    var punctuation = new Array("!", ".", ",", "?", ":", ";");
+		    /* [Locate elements for typesetter] */
+		    var orphan_control_elements = document.querySelectorAll(
+		     	"body.activate_kemosite_typography.orphan_control h1, "+
+		     	"body.activate_kemosite_typography.orphan_control h2, "+
+		     	"body.activate_kemosite_typography.orphan_control h3, "+
+		     	"body.activate_kemosite_typography.orphan_control h4, "+
+		     	"body.activate_kemosite_typography.orphan_control h5, "+
+		     	"body.activate_kemosite_typography.orphan_control h6, "+
+		     	"body.activate_kemosite_typography.orphan_control p," +
+		     	"body.activate_kemosite_typography.orphan_control td," +
+		     	"body.activate_kemosite_typography.orphan_control figcaption," +
+		     	"body.activate_kemosite_typography.orphan_control li"
+		     );
 
-	    for (var i = 0; i < orphan_control_elements.length; i++) {
+		    var punctuation_array = new Array("!", ".", ",", "?", ":", ";");
+		    var punctuation_regex_string = punctuation_array.join("|");
+		    var punctuation_regex = RegExp('[(' + punctuation_regex_string + ')]', 'g');
 
-	    	var orphan_control_element = typography_obj.recursive_locate_text(orphan_control_elements[i]);
-	    	
-	    	if (orphan_control_element.childNodes && orphan_control_element.childNodes.length == 1 && orphan_control_element.childNodes[0].nodeValue !== null && orphan_control_element.childNodes[0].nodeValue.includes(" ")) {
+		    for (var i = 0; i < orphan_control_elements.length; i++) {
 
-	    		var orphan_control_element_string = orphan_control_element.childNodes[0].nodeValue.toString();
-
-	    		/*
-	    		https://www.geeksforgeeks.org/javascript-split-a-string-with-multiple-separators/
-	    		var sentence_array = orphan_control_element_string.split(punctuation);
-	    		console.log(sentence_array);
-	    		*/
-
-				/* [Apply orphan control] */
-		    	var word_array = orphan_control_element_string.split(" ");
+		    	var orphan_control_element = typography_obj.recursive_locate_text(orphan_control_elements[i]);
 		    	
-		    	if (word_array.length > 3) {
+		    	if (orphan_control_element.childNodes && orphan_control_element.childNodes.length == 1 && orphan_control_element.childNodes[0].nodeValue !== null && orphan_control_element.childNodes[0].nodeValue.includes(" ")) {
 
-			    	for (var ii = 0; ii < word_array.length - 2; ii++) { // Look at each word for punctuation
+		    		var orphan_control_element_string = orphan_control_element.childNodes[0].nodeValue.toString();
 
-			    		var word = word_array[ii];
-						var evaluate_punctuation = word.substring(word.length - 1, word.length);
+		    		// evaluate performing REGEX search functions on [orphan_control_element_string]
+		    		// https://css-tricks.com/build-word-counter-app/
 
-			    		/*
-			    		 * If punctuation is found, apply non-breaking spaces to the preceding and following words.
-			    		 */
-			    		
-			    		if (ii > 0 && punctuation.indexOf(evaluate_punctuation) > 0) {
-			    			var preceding_words =  new Array(word_array[ii - 1], word);
-			    			var preceding_words_join = preceding_words.join("&nbsp;");
-			    			word_array.splice(ii - 1, 2, preceding_words_join);
-			    			ii--;
+		    		// var regex_words = orphan_control_element_string.match(/\b[-?(\w+)?]+\b/gi);
+					var regex_punctuation_match_array = orphan_control_element_string.match(punctuation_regex);
+					var regex_punctuation_split_array = orphan_control_element_string.split(punctuation_regex);
+					var orphan_control_reassemble_array = new Array();
 
-			    			var following_words =  new Array(word_array[ii + 1], word_array[ii + 2]);
-			    			var following_words_join = following_words.join("&nbsp;");
-			    			word_array.splice(ii + 1, 2, following_words_join);
+					/*
+					** [If punctuation was found, continue] **
+					*/
 
-			    		}
-			    		
-			    	}
+					if (regex_punctuation_match_array !== null && regex_punctuation_match_array.length > 0) {
 
-			    	var last_words =  word_array.splice(-2);
-			    	var last_words_join = last_words.join("&nbsp;");
-					word_array.push(last_words_join);
+						for (var ii = 0; ii < regex_punctuation_split_array.length; ii++) {
 
-					orphan_control_element_string = word_array.join(" ");
-					orphan_control_element.innerHTML = orphan_control_element_string;
+							var regex_words_match_count = new RegExp(/\b(\p{L}+?)\b/, 'giu');
+							var words_match_count = regex_punctuation_split_array[ii].match(regex_words_match_count);
 
-					orphan_control_element_string = "";
-					word_array = "";
+							// console.log(words_match_count);
+
+							var regex_start_of_sentence = new RegExp(/^(\s*)([\p{L}]*['"‘’“”]*[\p{L}]*)(?:\s)([\p{L}]*['"‘’“”]*[\p{L}]*)/, 'giu');
+							var regex_end_of_sentence = new RegExp(/([\p{L}]*['"‘’“”]*[\p{L}]*)(?:\s)([\p{L}]*['"‘’“”]*[\p{L}]*)$/, 'giu');
+
+							regex_punctuation_split_array[ii] = regex_punctuation_split_array[ii].replace("\n", ""); // Remove evil line breaks!
+
+							if (words_match_count !== null && words_match_count.length == 3) {
+
+								var replace_end_of_sentence = regex_punctuation_split_array[ii].replace(regex_end_of_sentence, "$1&nbsp;$2");
+								regex_punctuation_split_array[ii] = replace_end_of_sentence;
+								
+							}
+
+							else if (words_match_count !== null && words_match_count.length > 3) {							
+								
+								// var regex_start_of_sentence = regex_punctuation_split_array[ii].match(/^(?:\s*)(?:\w+)(\s*)(?:\w+)/gi);
+
+								var replace_start_of_sentence = regex_punctuation_split_array[ii].replace(regex_start_of_sentence, "$1$2&nbsp;$3");
+								var replace_end_of_sentence = replace_start_of_sentence.replace(regex_end_of_sentence, "$1&nbsp;$2");
+
+								// console.log(replace_end_of_sentence);
+															
+								// regex_punctuation_split_array[ii] = regex_punctuation_split_array[ii];
+								// regex_punctuation_split_array[ii] = replace_start_of_sentence;
+								regex_punctuation_split_array[ii] = replace_end_of_sentence;
+
+							}
+
+							// var beverage = (age >= 21) ? "Beer" : "Juice";
+							orphan_control_reassemble_array[ii] = (regex_punctuation_match_array[ii]) ? regex_punctuation_split_array[ii] + regex_punctuation_match_array[ii] : regex_punctuation_split_array[ii];
+
+						}
+
+						orphan_control_element_string = orphan_control_reassemble_array.join("");
+						orphan_control_element.innerHTML = orphan_control_element_string;
+
+					}
 
 				}
 
 			}
 
 		}
-		
 
 	};
 
