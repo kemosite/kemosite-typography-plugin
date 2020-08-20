@@ -2,11 +2,11 @@
 
 defined( 'ABSPATH' ) or die();
 
-$version = '5.5.0.1';
+$version = '5.5.0.2';
 
 /**
  * @package kemosite-typography-plugin
- * @version 5.5.0.1
+ * @version 5.5.0.2
  */
 /*
 Plugin Name: kemosite-typography-plugin
@@ -16,7 +16,7 @@ Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseline for all devices.
 Requires at least: 5.5
-Version: 5.5.0.1
+Version: 5.5.0.2
 Requires PHP: 7.3
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -128,8 +128,8 @@ function load_kemosite_typography_script() {
 	$adaptive_font_size = esc_attr( get_option('adaptive_font_size'));
 
 	wp_deregister_script('kemosite-typography');
-	wp_register_script('kemosite-typography', plugins_url('kemosite-typography.min.js', __FILE__), '', $version);
-	// wp_register_script('kemosite-typography', plugins_url('kemosite-typography.js', __FILE__), '', $version);
+	// wp_register_script('kemosite-typography', plugins_url('kemosite-typography.min.js', __FILE__), '', $version);
+	wp_register_script('kemosite-typography', plugins_url('kemosite-typography.js', __FILE__), '', $version);
 	wp_enqueue_script('kemosite-typography');
 
 	wp_deregister_script('activate_kemosite_typography');
@@ -138,12 +138,14 @@ function load_kemosite_typography_script() {
 
 	if ($activate_kemosite_typography === 'activate_kemosite_typography'):
 		wp_add_inline_script( 'activate_kemosite_typography', '
-			document.fonts.ready.then( function() {
-				typography_obj.init(); 
-				typography_obj.activate_kemosite_typography("'.$adaptive_font_size.'");
-				if (typeof Chart != "undefined" && Chart.defaults.global && typography_obj.outputs.font_height_pixels_min > 12) {
-					Chart.defaults.global.defaultFontSize = typography_obj.outputs.font_height_pixels_min;
-				}
+			document.addEventListener("DOMContentLoaded", (event) => {
+				document.fonts.ready.then( function() {
+					typography_obj.init(); 
+					typography_obj.activate_kemosite_typography("'.$adaptive_font_size.'");
+					if (typeof Chart != "undefined" && Chart.defaults.global && typography_obj.outputs.font_height_pixels_min > 12) {
+						Chart.defaults.global.defaultFontSize = typography_obj.outputs.font_height_pixels_min;
+					}
+				});
 			});
 		'); // Now supports presense of Chart JS!
 

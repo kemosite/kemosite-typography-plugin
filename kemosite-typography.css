@@ -1,6 +1,22 @@
 @charset "utf-8";
 
+/*
+Plugin Name: kemosite-typography-plugin
+Plugin URI: https://github.com/kemosite/kemosite-typography-plugin
+Github Plugin URI: https://github.com/kemosite/kemosite-typography-plugin
+Author: Kevin Montgomery
+Author URI: https://github.com/kemosite/
+Description: This plug-in establishes a reasonable typographic baseorphan_control_element for all devices. Version matches last tested Wordpress.
+Requires at least: 5.5
+Version: 5.5.0.2
+Requires PHP: 7.3
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: kemosite-wordpress-theme
+*/
+
 /* Load .js first! */
+
 :root {
 	--kemosite-typography-margin: 3ex;
 	--kemosite-typography-column-margin: 3ex auto;
