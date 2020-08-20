@@ -2,11 +2,11 @@
 
 defined( 'ABSPATH' ) or die();
 
-$version = '5.4.2.11';
+$version = '5.5.0.1';
 
 /**
  * @package kemosite-typography-plugin
- * @version 5.4.2.11
+ * @version 5.5.0.1
  */
 /*
 Plugin Name: kemosite-typography-plugin
@@ -15,8 +15,8 @@ Github Plugin URI: https://github.com/kemosite/kemosite-typography-plugin
 Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseline for all devices.
-Requires at least: 5.4
-Version: 5.4.2.11
+Requires at least: 5.5
+Version: 5.5.0.1
 Requires PHP: 7.3
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -125,6 +125,7 @@ function load_kemosite_typography_script() {
 
 	$activate_kemosite_typography = esc_attr( get_option('activate_kemosite_typography'));
 	$orphan_control = esc_attr( get_option('orphan_control'));
+	$adaptive_font_size = esc_attr( get_option('adaptive_font_size'));
 
 	wp_deregister_script('kemosite-typography');
 	wp_register_script('kemosite-typography', plugins_url('kemosite-typography.min.js', __FILE__), '', $version);
@@ -137,16 +138,14 @@ function load_kemosite_typography_script() {
 
 	if ($activate_kemosite_typography === 'activate_kemosite_typography'):
 		wp_add_inline_script( 'activate_kemosite_typography', '
-			document.addEventListener("DOMContentLoaded", function() {
+			document.fonts.ready.then( function() {
 				typography_obj.init(); 
-				typography_obj.activate_kemosite_typography();
+				typography_obj.activate_kemosite_typography("'.$adaptive_font_size.'");
 				if (typeof Chart != "undefined" && Chart.defaults.global && typography_obj.outputs.font_height_pixels_min > 12) {
 					Chart.defaults.global.defaultFontSize = typography_obj.outputs.font_height_pixels_min;
 				}
 			});
 		'); // Now supports presense of Chart JS!
-
-		// wp_add_inline_script( 'kemosite-typography', 'typography_obj.init(); console.log(typography_obj);' );
 
 		if ($orphan_control === 'orphan_control'):
 			wp_add_inline_script( 'activate_kemosite_typography', 'document.addEventListener("DOMContentLoaded", function() { typography_obj.orphans_control(); });');
@@ -163,12 +162,18 @@ function load_kemosite_typography_script() {
 add_action('wp_enqueue_scripts', 'load_kemosite_typography_script');
 
 function load_kemosite_typography_css() {
+
+	global $version;
+
+	wp_deregister_style('kemosite-typography');
 	
-	echo '<link rel="stylesheet" type="text/css" href="' . plugins_url() . '/kemosite-typography-plugin/kemosite-typography.min.css" />' . "\n";
-	// echo '<link rel="stylesheet" type="text/css" href="' . plugins_url() . '/kemosite-typography-plugin/kemosite-typography.css" />' . "\n";
+	wp_register_style( 'kemosite-typography', plugins_url() . '/kemosite-typography-plugin/kemosite-typography.min.css' );
+	// wp_register_style( 'kemosite-typography', plugins_url() . '/kemosite-typography-plugin/kemosite-typography.css', '', $version);
+
+	wp_enqueue_style('kemosite-typography');
 	
 }
-add_action('wp_head', 'load_kemosite_typography_css');
+add_action('wp_enqueue_scripts', 'load_kemosite_typography_css');
 
 
 /**
@@ -180,12 +185,6 @@ endif;
 function kemosite_typography_remove_columns( $classes ) {
 
 	$kemosite_typography_remove_columns = get_post_meta(get_the_ID(), 'kemosite_typography_remove_columns');
-
-	/*
-	echo "<pre>";
-	print_r($kemosite_typography_remove_columns);
-	echo "</pre>";
-	*/
 
 	if (isset($kemosite_typography_remove_columns[0]) && $kemosite_typography_remove_columns[0] != null):
 		$kemosite_typography_remove_columns = $kemosite_typography_remove_columns[0];

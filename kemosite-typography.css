@@ -1,5 +1,6 @@
 @charset "utf-8";
 
+/* Load .js first! */
 :root {
 	--kemosite-typography-margin: 3ex;
 	--kemosite-typography-column-margin: 3ex auto;
@@ -7,6 +8,18 @@
 	--kemosite-typography-widows-orphans: 2;
 	--kemosite-typography-line-height: 3ex;
 }
+
+/* html { font-size: var(--kemosite-typography-100) !important; } */
+body.activate_kemosite_typography { font-size: var(--kemosite-typography-100); }
+body._100.activate_kemosite_typography { font-size: var(--kemosite-typography-100); }
+body._200.activate_kemosite_typography { font-size: var(--kemosite-typography-200); }
+body._300.activate_kemosite_typography { font-size: var(--kemosite-typography-300); }
+body._400.activate_kemosite_typography { font-size: var(--kemosite-typography-400); }
+body._500.activate_kemosite_typography { font-size: var(--kemosite-typography-500); }
+body._600.activate_kemosite_typography { font-size: var(--kemosite-typography-600); }
+body._700.activate_kemosite_typography { font-size: var(--kemosite-typography-700); }
+body._800.activate_kemosite_typography { font-size: var(--kemosite-typography-800); }
+body._900.activate_kemosite_typography { font-size: var(--kemosite-typography-900); }
 
 body.activate_kemosite_typography h1,
 body.activate_kemosite_typography h2,

@@ -5,8 +5,8 @@ Github Plugin URI: https://github.com/kemosite/kemosite-typography-plugin
 Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseorphan_control_element for all devices. Version matches last tested Wordpress.
-Requires at least: 5.4
-Version: 5.4.2.11
+Requires at least: 5.5
+Version: 5.5.0.1
 Requires PHP: 7.3
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -108,21 +108,23 @@ var typography_obj = new function() {
 		/* [Create element to evaluate users properties] */
 		var user_properties_obj = document.createElement("div");
 		user_properties_obj.setAttribute("id", "user_properties_obj");
-		user_properties_obj.setAttribute("style", "line-height: 100%; padding: 0; margin: 0; width: 1in;");
+		
 		// user_properties_obj.innerHTML = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890&@.,?!’“”()";
 		// user_properties_obj.innerHTML = "Typography";
 		user_properties_obj.innerHTML = "Typhy";
+		
 		document.getElementsByTagName("body")[0].insertBefore(user_properties_obj, document.getElementsByTagName("body")[0].childNodes[0]);
 
 	    /* [Calculate users font size] */
-		typography_obj.user_configuration.font_height_pixels = Math.max(user_properties_obj.scrollHeight,user_properties_obj.offsetHeight,user_properties_obj.clientHeight);
+	    user_properties_obj.setAttribute("style", "font-size: 1rem; line-height: 1; padding: 0; margin: 0; width: 1in; border: 0;");		
+		typography_obj.user_configuration.font_height_pixels = user_properties_obj.clientHeight;
 
 	    /* [Calculate users screen resolution] */
-		typography_obj.user_configuration.characters_width = Math.max(user_properties_obj.scrollWidth,user_properties_obj.offsetWidth,user_properties_obj.clientWidth);
+		typography_obj.user_configuration.characters_width = user_properties_obj.clientWidth;
 	    
 	    /* [Reduce element font size to calculate 1ex] */
-	    user_properties_obj.setAttribute("style", "line-height: 100%; padding: 0; margin: 0; width: 1in; font-size: 1ex;");  
-		typography_obj.user_configuration.ex_height_pixels = Math.max(user_properties_obj.scrollHeight, user_properties_obj.offsetHeight, user_properties_obj.clientHeight);
+	    user_properties_obj.setAttribute("style", "font-size: 1ex; line-height: 1; padding: 0; margin: 0; width: 1in; border: 0;");  
+		typography_obj.user_configuration.ex_height_pixels = user_properties_obj.clientHeight;
 
 	    /* [Remove testing object] */
 	    // console.log(user_properties_obj);
@@ -195,18 +197,23 @@ var typography_obj = new function() {
 	    typography_obj.outputs.font_height_pixels_900 = Math.max(typography_obj.outputs.font_height_pixels_800 + 1, letter_diameter_pixels_array[8], typography_obj.user_configuration.font_height_pixels);
 
 	    /* [Calculate height using em measure.] */
-	    typography_obj.outputs.font_height_em_100 = Math.round((typography_obj.outputs.font_height_pixels_100 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
-	    typography_obj.outputs.font_height_em_200 = Math.round((typography_obj.outputs.font_height_pixels_200 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
-	    typography_obj.outputs.font_height_em_300 = Math.round((typography_obj.outputs.font_height_pixels_300 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
-	    typography_obj.outputs.font_height_em_400 = Math.round((typography_obj.outputs.font_height_pixels_400 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
-	    typography_obj.outputs.font_height_em_500 = Math.round((typography_obj.outputs.font_height_pixels_500 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
-	    typography_obj.outputs.font_height_em_600 = Math.round((typography_obj.outputs.font_height_pixels_600 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
-	    typography_obj.outputs.font_height_em_700 = Math.round((typography_obj.outputs.font_height_pixels_700 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
-	    typography_obj.outputs.font_height_em_800 = Math.round((typography_obj.outputs.font_height_pixels_800 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
-	    typography_obj.outputs.font_height_em_900 = Math.round((typography_obj.outputs.font_height_pixels_900 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
+	    /*
+	    typography_obj.outputs.font_height_ratio_100 = Math.round((typography_obj.outputs.font_height_pixels_100 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
+	    typography_obj.outputs.font_height_ratio_200 = Math.round((typography_obj.outputs.font_height_pixels_200 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
+	    typography_obj.outputs.font_height_ratio_300 = Math.round((typography_obj.outputs.font_height_pixels_300 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
+	    typography_obj.outputs.font_height_ratio_400 = Math.round((typography_obj.outputs.font_height_pixels_400 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
+	    typography_obj.outputs.font_height_ratio_500 = Math.round((typography_obj.outputs.font_height_pixels_500 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
+	    typography_obj.outputs.font_height_ratio_600 = Math.round((typography_obj.outputs.font_height_pixels_600 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
+	    typography_obj.outputs.font_height_ratio_700 = Math.round((typography_obj.outputs.font_height_pixels_700 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
+	    typography_obj.outputs.font_height_ratio_800 = Math.round((typography_obj.outputs.font_height_pixels_800 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
+	    typography_obj.outputs.font_height_ratio_900 = Math.round((typography_obj.outputs.font_height_pixels_900 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
+	    */
 
 	    /* [Font Size Adjust] */
-	    typography_obj.outputs.font_size_adjust = typography_obj.parameters.font_height_ratio;
+	    // typography_obj.outputs.font_size_adjust = typography_obj.parameters.font_height_ratio;
+	    // Value uncertain: Only works in Firefox, after font already loaded?
+
+	    // console.log(typography_obj.outputs);
 
 	    /*
 	     * Apply style properties to "typography" class
@@ -220,51 +227,75 @@ var typography_obj = new function() {
 
 	};
 
-	this.activate_kemosite_typography = function() {
+	this.activate_kemosite_typography = function(adaptive_font_size_option) {
+
+		var adaptive_font_size = adaptive_font_size_option.replace("_","-");
 
 		var typography_css = document.createElement('style');
 		typography_css.setAttribute("type", "text/css");
 
-		var typography_body_size = "body._100.activate_kemosite_typography { "+
-			"font-size: "+typography_obj.outputs.font_height_em_100+"em; "+
+		var typography_root_size = ":root { " +
+			"--kemosite-typography-100: "+typography_obj.outputs.font_height_pixels_100+"px;" +
+			"--kemosite-typography-200: "+typography_obj.outputs.font_height_pixels_200+"px;" +
+			"--kemosite-typography-300: "+typography_obj.outputs.font_height_pixels_300+"px;" +
+			"--kemosite-typography-400: "+typography_obj.outputs.font_height_pixels_400+"px;" +
+			"--kemosite-typography-500: "+typography_obj.outputs.font_height_pixels_500+"px;" +
+			"--kemosite-typography-600: "+typography_obj.outputs.font_height_pixels_600+"px;" +
+			"--kemosite-typography-700: "+typography_obj.outputs.font_height_pixels_700+"px;" +
+			"--kemosite-typography-800: "+typography_obj.outputs.font_height_pixels_800+"px;" +
+			"--kemosite-typography-900: "+typography_obj.outputs.font_height_pixels_900+"px;" +
+		"} " +
+		"html { "+
+			"font-size: var(--kemosite-typography"+adaptive_font_size+") !important;" +
+		"} ";
+
+		/*
+		var typography_body_size = "html { "+
+			"font-size: "+typography_obj.outputs.font_height_pixels_500+"px; "+
+		"} " +
+		"body._100.activate_kemosite_typography { "+
+			"font-size: "+typography_obj.outputs.font_height_pixels_100+"px; "+
 		"} " +
 		"body._200.activate_kemosite_typography { "+
-			"font-size: "+typography_obj.outputs.font_height_em_200+"em; "+
+			"font-size: "+typography_obj.outputs.font_height_pixels_200+"px; "+
 		"} " +
 		"body._300.activate_kemosite_typography { "+
-			"font-size: "+typography_obj.outputs.font_height_em_300+"em; "+
+			"font-size: "+typography_obj.outputs.font_height_pixels_300+"px; "+
 		"} " +
 		"body._400.activate_kemosite_typography { "+
-			"font-size: "+typography_obj.outputs.font_height_em_400+"em; "+
+			"font-size: "+typography_obj.outputs.font_height_pixels_400+"px; "+
 		"} " +
 		"body._500.activate_kemosite_typography { "+
-			"font-size: "+typography_obj.outputs.font_height_em_500+"em; "+
+			"font-size: "+typography_obj.outputs.font_height_pixels_500+"px; "+
 		"} " +
 		"body._600.activate_kemosite_typography { "+
-			"font-size: "+typography_obj.outputs.font_height_em_600+"em; "+
+			"font-size: "+typography_obj.outputs.font_height_pixels_600+"px; "+
 		"} " +
 		"body._700.activate_kemosite_typography { "+
-			"font-size: "+typography_obj.outputs.font_height_em_700+"em; "+
+			"font-size: "+typography_obj.outputs.font_height_pixels_700+"px; "+
 		"} " +
 		"body._800.activate_kemosite_typography { "+
-			"font-size: "+typography_obj.outputs.font_height_em_800+"em; "+
+			"font-size: "+typography_obj.outputs.font_height_pixels_800+"px; "+
 		"} " +
 		"body._900.activate_kemosite_typography { "+
-			"font-size: "+typography_obj.outputs.font_height_em_900+"em; "+
+			"font-size: "+typography_obj.outputs.font_height_pixels_900+"px; "+
 		"} " +
 		"body.activate_kemosite_typography { "+
-			"font-size: "+typography_obj.outputs.font_height_em_500+"em; "+
+			"font-size: "+typography_obj.outputs.font_height_pixels_500+"px; "+
 		"} " ;
+		*/
 
 		if (typography_css.styleSheet) {
-			typography_css.styleSheet.cssText = typography_body_size; // + typography_copy_margins; // + typography_header_margins;
+			// typography_css.styleSheet.cssText = typography_body_size; // + typography_copy_margins; // + typography_header_margins;
+			typography_css.styleSheet.cssText = typography_root_size; // + typography_copy_margins; // + typography_header_margins;
 		} else {
-			typography_css.appendChild(document.createTextNode(typography_body_size));
+			// typography_css.appendChild(document.createTextNode(typography_body_size));
+			typography_css.appendChild(document.createTextNode(typography_root_size));
 			// typography_css.appendChild(document.createTextNode(typography_copy_margins));
 			// typography_css.appendChild(document.createTextNode(typography_header_margins));
 		}
 
-		document.getElementsByTagName("head")[0].appendChild(typography_css);
+		document.getElementsByTagName("head")[0].insertBefore(typography_css, document.getElementsByTagName("head")[0].childNodes[0]);
 
 	};
 
