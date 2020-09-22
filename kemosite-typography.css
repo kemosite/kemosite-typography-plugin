@@ -53,7 +53,6 @@ body.activate_kemosite_typography h6 {
 body.activate_kemosite_typography button,
 body.activate_kemosite_typography .button,
 body.activate_kemosite_typography .wp-block-button {
-	column-span: all;
 	margin-top: var(--kemosite-typography-margin);
 	margin-bottom: var(--kemosite-typography-margin);
 	widows: var(--kemosite-typography-widows-orphans);
@@ -162,6 +161,12 @@ body.activate_kemosite_typography :not(#wpadminbar) p:nth-child(1) {
 		column-gap: var(--kemosite-typography-column-gap);
 		text-align: justify;
 		hyphens: auto;
+	}
+
+	body.activate_kemosite_typography button,
+	body.activate_kemosite_typography .button,
+	body.activate_kemosite_typography .wp-block-button {
+		column-span: all;
 	}
 
 }
