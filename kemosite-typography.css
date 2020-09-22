@@ -152,7 +152,7 @@ body.activate_kemosite_typography :not(#wpadminbar) p:nth-child(1) {
 
 }
 
-@media screen and (min-width: 81ch) and (min-height: 39ex) {
+@media screen and (min-width: 87ch) and (min-height: 39ex) {
 
 	body.activate_kemosite_typography .post,
 	body.activate_kemosite_typography .page,
@@ -167,6 +167,7 @@ body.activate_kemosite_typography :not(#wpadminbar) p:nth-child(1) {
 	body.activate_kemosite_typography .button,
 	body.activate_kemosite_typography .wp-block-button {
 		column-span: all;
+		width: 100%;
 	}
 
 }
