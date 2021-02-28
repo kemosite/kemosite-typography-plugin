@@ -6,8 +6,8 @@ Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseorphan_control_element for all devices. Version matches last tested Wordpress.
 Requires at least: 5.5
-Version: 5.5.0.3
-Requires PHP: 7.3
+Version: 5.6.2.1
+Requires PHP: 7.4
 License: GNU General Public License v2 or later
 License URI: LICENSE
 Text Domain: kemosite-wordpress-theme
@@ -196,19 +196,6 @@ var typography_obj = new function() {
 	    typography_obj.outputs.font_height_pixels_800 = Math.max(typography_obj.outputs.font_height_pixels_700 + 1, letter_diameter_pixels_array[7], typography_obj.user_configuration.font_height_pixels);
 	    typography_obj.outputs.font_height_pixels_900 = Math.max(typography_obj.outputs.font_height_pixels_800 + 1, letter_diameter_pixels_array[8], typography_obj.user_configuration.font_height_pixels);
 
-	    /* [Calculate height using em measure.] */
-	    /*
-	    typography_obj.outputs.font_height_ratio_100 = Math.round((typography_obj.outputs.font_height_pixels_100 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
-	    typography_obj.outputs.font_height_ratio_200 = Math.round((typography_obj.outputs.font_height_pixels_200 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
-	    typography_obj.outputs.font_height_ratio_300 = Math.round((typography_obj.outputs.font_height_pixels_300 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
-	    typography_obj.outputs.font_height_ratio_400 = Math.round((typography_obj.outputs.font_height_pixels_400 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
-	    typography_obj.outputs.font_height_ratio_500 = Math.round((typography_obj.outputs.font_height_pixels_500 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
-	    typography_obj.outputs.font_height_ratio_600 = Math.round((typography_obj.outputs.font_height_pixels_600 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
-	    typography_obj.outputs.font_height_ratio_700 = Math.round((typography_obj.outputs.font_height_pixels_700 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
-	    typography_obj.outputs.font_height_ratio_800 = Math.round((typography_obj.outputs.font_height_pixels_800 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
-	    typography_obj.outputs.font_height_ratio_900 = Math.round((typography_obj.outputs.font_height_pixels_900 / typography_obj.user_configuration.font_height_pixels) * 1000) / 1000;
-	    */
-
 	    /* [Font Size Adjust] */
 	    // typography_obj.outputs.font_size_adjust = typography_obj.parameters.font_height_ratio;
 	    // Value uncertain: Only works in Firefox, after font already loaded?
@@ -248,42 +235,6 @@ var typography_obj = new function() {
 		"html { "+
 			"font-size: var(--kemosite-typography"+adaptive_font_size+") !important;" +
 		"} ";
-
-		/*
-		var typography_body_size = "html { "+
-			"font-size: "+typography_obj.outputs.font_height_pixels_500+"px; "+
-		"} " +
-		"body._100.activate_kemosite_typography { "+
-			"font-size: "+typography_obj.outputs.font_height_pixels_100+"px; "+
-		"} " +
-		"body._200.activate_kemosite_typography { "+
-			"font-size: "+typography_obj.outputs.font_height_pixels_200+"px; "+
-		"} " +
-		"body._300.activate_kemosite_typography { "+
-			"font-size: "+typography_obj.outputs.font_height_pixels_300+"px; "+
-		"} " +
-		"body._400.activate_kemosite_typography { "+
-			"font-size: "+typography_obj.outputs.font_height_pixels_400+"px; "+
-		"} " +
-		"body._500.activate_kemosite_typography { "+
-			"font-size: "+typography_obj.outputs.font_height_pixels_500+"px; "+
-		"} " +
-		"body._600.activate_kemosite_typography { "+
-			"font-size: "+typography_obj.outputs.font_height_pixels_600+"px; "+
-		"} " +
-		"body._700.activate_kemosite_typography { "+
-			"font-size: "+typography_obj.outputs.font_height_pixels_700+"px; "+
-		"} " +
-		"body._800.activate_kemosite_typography { "+
-			"font-size: "+typography_obj.outputs.font_height_pixels_800+"px; "+
-		"} " +
-		"body._900.activate_kemosite_typography { "+
-			"font-size: "+typography_obj.outputs.font_height_pixels_900+"px; "+
-		"} " +
-		"body.activate_kemosite_typography { "+
-			"font-size: "+typography_obj.outputs.font_height_pixels_500+"px; "+
-		"} " ;
-		*/
 
 		if (typography_css.styleSheet) {
 			// typography_css.styleSheet.cssText = typography_body_size; // + typography_copy_margins; // + typography_header_margins;

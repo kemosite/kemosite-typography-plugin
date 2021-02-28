@@ -2,11 +2,11 @@
 
 defined( 'ABSPATH' ) or die();
 
-$version = '5.5.1.3';
+$version = '5.6.2.1';
 
 /**
  * @package kemosite-typography-plugin
- * @version 5.5.1.3
+ * @version 5.6.2.1
  */
 /*
 Plugin Name: kemosite-typography-plugin
@@ -16,12 +16,19 @@ Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseline for all devices.
 Requires at least: 5.5
-Version: 5.5.1.3
-Requires PHP: 7.3
+Version: 5.6.2.1
+Requires PHP: 7.4
 License: GNU General Public License v2 or later
 License URI: LICENSE
 Text Domain: kemosite-wordpress-theme
 */
+
+// Determine whether this is an AMP response.
+if (!function_exists('is_amp_detected')):
+	function is_amp_detected() {
+	    return function_exists( 'is_amp_endpoint' ) && is_amp_endpoint();
+	}
+endif;
 
 add_action( 'admin_menu', 'kemosite_typography_menu' );
 
@@ -121,6 +128,12 @@ function kemosite_typography_classes( $classes ) {
 
 function load_kemosite_typography_script() {
 
+	// Do not load scripts if AMP is detected.
+	// Consider whether an AMP version is possible, or even necessary.
+	if (is_amp_detected() ) {
+        return;
+    }
+
 	global $version;
 
 	$activate_kemosite_typography = esc_attr( get_option('activate_kemosite_typography'));
@@ -165,11 +178,32 @@ add_action('wp_enqueue_scripts', 'load_kemosite_typography_script');
 
 function load_kemosite_typography_css() {
 
+	if ( is_amp_detected() ):
+
+		$adaptive_font_size = esc_attr( get_option('adaptive_font_size'));
+       	
+		$typography_root_size = ":root { " .
+			"--kemosite-typography-100: calc(1rem - 4px);".
+			"--kemosite-typography-200: calc(1rem - 3px);".
+			"--kemosite-typography-300: calc(1rem - 2px);".
+			"--kemosite-typography-400: calc(1rem - 1px);".
+			"--kemosite-typography-500: 1rem;" .
+			"--kemosite-typography-600: calc(1rem + 1px);".
+			"--kemosite-typography-700: calc(1rem + 2px);".
+			"--kemosite-typography-800: calc(1rem + 3px);".
+			"--kemosite-typography-900: calc(1rem + 4px);".
+		"} " .
+		"html { ".
+			"font-size: var(--kemosite-typography".$adaptive_font_size.") !important;" .
+		"} ";
+
+    endif;
+
 	global $version;
 
 	wp_deregister_style('kemosite-typography');
 	
-	wp_register_style( 'kemosite-typography', plugins_url() . '/kemosite-typography-plugin/kemosite-typography.min.css' );
+	wp_register_style( 'kemosite-typography', plugins_url() . '/kemosite-typography-plugin/kemosite-typography.min.css', '', $version);
 	// wp_register_style( 'kemosite-typography', plugins_url() . '/kemosite-typography-plugin/kemosite-typography.css', '', $version);
 
 	wp_enqueue_style('kemosite-typography');
