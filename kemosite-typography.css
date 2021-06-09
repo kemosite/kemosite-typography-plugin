@@ -8,7 +8,7 @@ Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseorphan_control_element for all devices. Version matches last tested Wordpress.
 Requires at least: 5.5
-Version: 5.6.2.1
+Version: 5.7.2.1
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -37,6 +37,7 @@ body._700.activate_kemosite_typography { font-size: var(--kemosite-typography-70
 body._800.activate_kemosite_typography { font-size: var(--kemosite-typography-800); }
 body._900.activate_kemosite_typography { font-size: var(--kemosite-typography-900); }
 
+body.activate_kemosite_typography figure,
 body.activate_kemosite_typography h1,
 body.activate_kemosite_typography h2,
 body.activate_kemosite_typography h3,
@@ -146,8 +147,8 @@ body.activate_kemosite_typography :not(#wpadminbar) p:nth-child(1) {
 	body.activate_kemosite_typography :not(#wpadminbar) li,
 	body.activate_kemosite_typography :not(#wpadminbar) p {
 		max-width: 59ch;
-		margin-left: auto;
-		margin-right: auto;
+		margin-left: auto !important;
+		margin-right: auto !important;
 	}
 
 }

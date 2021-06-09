@@ -6,7 +6,7 @@ Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseorphan_control_element for all devices. Version matches last tested Wordpress.
 Requires at least: 5.5
-Version: 5.6.2.1
+Version: 5.7.2.1
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -123,7 +123,7 @@ var typography_obj = new function() {
 		typography_obj.user_configuration.characters_width = user_properties_obj.clientWidth;
 	    
 	    /* [Reduce element font size to calculate 1ex] */
-	    user_properties_obj.setAttribute("style", "font-size: 1ex; line-height: 1; padding: 0; margin: 0; width: 1in; border: 0;");  
+	    user_properties_obj.setAttribute("style", "font-size: 1ex; line-height: 1; padding: 0; margin: 0; width: 1in; border: 0;");
 		typography_obj.user_configuration.ex_height_pixels = user_properties_obj.clientHeight;
 
 	    /* [Remove testing object] */
@@ -179,7 +179,12 @@ var typography_obj = new function() {
 	    letter_diameter_pixels_array[i++] = Math.round((typography_obj.parameters.final_foveal_vision_pixels_min / 5) / typography_obj.parameters.font_height_ratio);
 	    letter_diameter_pixels_array[i++] = Math.round((typography_obj.parameters.final_foveal_vision_pixels_avg / 5) / typography_obj.parameters.font_height_ratio);
 	    letter_diameter_pixels_array[i++] = Math.round((typography_obj.parameters.final_foveal_vision_pixels_max / 5) / typography_obj.parameters.font_height_ratio);
-	    letter_diameter_pixels_array.sort();
+
+	    /*
+	    numArray.sort((a, b) => a - b); // For ascending sort
+		numArray.sort((a, b) => b - a); // For descending sort
+		*/
+	    letter_diameter_pixels_array.sort((a, b) => a - b);
 
 	    /** 
 	     * [Outputs calculations] 
@@ -233,7 +238,8 @@ var typography_obj = new function() {
 			"--kemosite-typography-900: "+typography_obj.outputs.font_height_pixels_900+"px;" +
 		"} " +
 		"html { "+
-			"font-size: var(--kemosite-typography"+adaptive_font_size+") !important;" +
+			// "font-size: var(--kemosite-typography"+adaptive_font_size+") !important;" +
+			"font-size: 1rem !important;" +
 		"} ";
 
 		if (typography_css.styleSheet) {

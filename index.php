@@ -2,11 +2,11 @@
 
 defined( 'ABSPATH' ) or die();
 
-$version = '5.6.2.1';
+$version = '5.7.2.1';
 
 /**
  * @package kemosite-typography-plugin
- * @version 5.6.2.1
+ * @version 5.7.2.1
  */
 /*
 Plugin Name: kemosite-typography-plugin
@@ -16,7 +16,7 @@ Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseline for all devices.
 Requires at least: 5.5
-Version: 5.6.2.1
+Version: 5.7.2.1
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -58,6 +58,8 @@ function  kemosite_typography_settings_page() { ?>
 
 <table class="form-table">
 
+<caption>Activate Typography settings, select adaptive font size, and activate orphan control.</caption>
+
 <tr valign="top">
 <th scope="row">Activate Typography Settings</th>
 <td>
@@ -73,18 +75,21 @@ $activate_kemosite_typography = esc_attr( get_option('activate_kemosite_typograp
 <th scope="row">Adaptive Font Size</th>
 <td>
 <?php
+
 $adaptive_font_size = esc_attr( get_option('adaptive_font_size'));
+$selected_statement = ' selected="selected"'; // Avoiding duplication
+
 ?>
 <select name="adaptive_font_size">
-<option value="_100"<?php if ($adaptive_font_size === "_100"): echo ' selected="selected"'; endif;?>>100</option>
-<option value="_200"<?php if ($adaptive_font_size === "_200"): echo ' selected="selected"';  endif;?>>200</option>
-<option value="_300"<?php if ($adaptive_font_size === "_300"): echo ' selected="selected"';  endif;?>>300</option>
-<option value="_400"<?php if ($adaptive_font_size === "_400"): echo ' selected="selected"';  endif;?>>400</option>
-<option value="_500"<?php if ($adaptive_font_size === "_500"): echo ' selected="selected"';  endif;?>>500</option>
-<option value="_600"<?php if ($adaptive_font_size === "_600"): echo ' selected="selected"';  endif;?>>600</option>
-<option value="_700"<?php if ($adaptive_font_size === "_700"): echo ' selected="selected"';  endif;?>>700</option>
-<option value="_800"<?php if ($adaptive_font_size === "_800"): echo ' selected="selected"';  endif;?>>800</option>
-<option value="_900"<?php if ($adaptive_font_size === "_900"): echo ' selected="selected"';  endif;?>>900</option>
+<option value="_100"<?php if ($adaptive_font_size === "_100"): echo $selected_statement; endif;?>>100</option>
+<option value="_200"<?php if ($adaptive_font_size === "_200"): echo $selected_statement;  endif;?>>200</option>
+<option value="_300"<?php if ($adaptive_font_size === "_300"): echo $selected_statement;  endif;?>>300</option>
+<option value="_400"<?php if ($adaptive_font_size === "_400"): echo $selected_statement;  endif;?>>400</option>
+<option value="_500"<?php if ($adaptive_font_size === "_500"): echo $selected_statement;  endif;?>>500</option>
+<option value="_600"<?php if ($adaptive_font_size === "_600"): echo $selected_statement;  endif;?>>600</option>
+<option value="_700"<?php if ($adaptive_font_size === "_700"): echo $selected_statement;  endif;?>>700</option>
+<option value="_800"<?php if ($adaptive_font_size === "_800"): echo $selected_statement;  endif;?>>800</option>
+<option value="_900"<?php if ($adaptive_font_size === "_900"): echo $selected_statement;  endif;?>>900</option>
 </select>
 </td>
 </tr>
@@ -153,7 +158,7 @@ function load_kemosite_typography_script() {
 		wp_add_inline_script( 'activate_kemosite_typography', '
 			document.addEventListener("DOMContentLoaded", (event) => {
 				document.fonts.ready.then( function() {
-					typography_obj.init(); 
+					typography_obj.init();
 					typography_obj.activate_kemosite_typography("'.$adaptive_font_size.'");
 					if (typeof Chart != "undefined" && Chart.defaults.global && typography_obj.outputs.font_height_pixels_min > 12) {
 						Chart.defaults.global.defaultFontSize = typography_obj.outputs.font_height_pixels_min;
@@ -194,7 +199,8 @@ function load_kemosite_typography_css() {
 			"--kemosite-typography-900: calc(1rem + 4px);".
 		"} " .
 		"html { ".
-			"font-size: var(--kemosite-typography".$adaptive_font_size.") !important;" .
+			// "font-size: var(--kemosite-typography".$adaptive_font_size.") !important;" .
+			"font-size: 1rem !important;" .
 		"} ";
 
     endif;
@@ -234,21 +240,26 @@ function kemosite_typography_remove_columns( $classes ) {
 }
 
 if ( !function_exists('is_user_logged_in') ) :
-/**
- * Checks if the current visitor is a logged in user.
- *
- * @since 2.0.0
- *
- * @return bool True if user is logged in, false if not logged in.
- */
-function is_user_logged_in() {
-	$user = wp_get_current_user();
+	
+	/**
+	 * Checks if the current visitor is a logged in user.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @return bool True if user is logged in, false if not logged in.
+	 */
+	function is_user_logged_in() {
+		
+		$user = wp_get_current_user();
 
-	if ( empty( $user->ID ) )
-		return false;
+		if ( empty( $user->ID ) ):
+			return false;
+		endif;
 
-	return true;
-}
+		return true;
+		
+	}
+
 endif;
 
 ?>
