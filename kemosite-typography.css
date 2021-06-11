@@ -7,8 +7,8 @@ Github Plugin URI: https://github.com/kemosite/kemosite-typography-plugin
 Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseorphan_control_element for all devices. Version matches last tested Wordpress.
-Requires at least: 5.5
-Version: 5.7.2.1
+Requires at least: 5.7
+Version: 5.7.2.2
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -26,7 +26,10 @@ Text Domain: kemosite-wordpress-theme
 }
 
 /* html { font-size: var(--kemosite-typography-100) !important; } */
-body.activate_kemosite_typography { font-size: var(--kemosite-typography-100); }
+body.activate_kemosite_typography {
+	font-size: var(--kemosite-typography-100);
+	font-size-adjust: var(--kemosite-typography-font-size-adjust);
+}
 body._100.activate_kemosite_typography { font-size: var(--kemosite-typography-100); }
 body._200.activate_kemosite_typography { font-size: var(--kemosite-typography-200); }
 body._300.activate_kemosite_typography { font-size: var(--kemosite-typography-300); }
@@ -37,13 +40,22 @@ body._700.activate_kemosite_typography { font-size: var(--kemosite-typography-70
 body._800.activate_kemosite_typography { font-size: var(--kemosite-typography-800); }
 body._900.activate_kemosite_typography { font-size: var(--kemosite-typography-900); }
 
-body.activate_kemosite_typography figure,
+body.activate_kemosite_typography button,
+body.activate_kemosite_typography .button,
+body.activate_kemosite_typography .wp-block-button {
+	column-span: all;
+	width: 100%;
+}
+
 body.activate_kemosite_typography h1,
 body.activate_kemosite_typography h2,
 body.activate_kemosite_typography h3,
 body.activate_kemosite_typography h4,
 body.activate_kemosite_typography h5,
-body.activate_kemosite_typography h6 {
+body.activate_kemosite_typography h6,
+body.activate_kemosite_typography figure,
+body.activate_kemosite_typography nav,
+body.activate_kemosite_typography hr {
 	column-span: all;
 	margin-top: 1ex;
 	margin-bottom: 1ex;
@@ -155,20 +167,13 @@ body.activate_kemosite_typography :not(#wpadminbar) p:nth-child(1) {
 
 @media screen and (min-width: 87ch) and (min-height: 39ex) {
 
-	body.activate_kemosite_typography .post,
-	body.activate_kemosite_typography .page,
-	body.activate_kemosite_typography .single {
+	body.activate_kemosite_typography .post.kemosite_typography_columns,
+	body.activate_kemosite_typography .page.kemosite_typography_columns,
+	body.activate_kemosite_typography .single.kemosite_typography_columns {
 		columns: 39ch auto;
 		column-gap: var(--kemosite-typography-column-gap);
 		text-align: justify;
 		hyphens: auto;
-	}
-
-	body.activate_kemosite_typography button,
-	body.activate_kemosite_typography .button,
-	body.activate_kemosite_typography .wp-block-button {
-		column-span: all;
-		width: 100%;
 	}
 
 }

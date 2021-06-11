@@ -5,8 +5,8 @@ Github Plugin URI: https://github.com/kemosite/kemosite-typography-plugin
 Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseorphan_control_element for all devices. Version matches last tested Wordpress.
-Requires at least: 5.5
-Version: 5.7.2.1
+Requires at least: 5.7
+Version: 5.7.2.2
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -72,7 +72,7 @@ var typography_obj = new function() {
 
 		/* [Establish parameters for users font size] */
 		font_height_pixels: "",
-		ex_height_pixels: ""
+		ex_height_pixels: "",
 
 	};
 
@@ -202,10 +202,8 @@ var typography_obj = new function() {
 	    typography_obj.outputs.font_height_pixels_900 = Math.max(typography_obj.outputs.font_height_pixels_800 + 1, letter_diameter_pixels_array[8], typography_obj.user_configuration.font_height_pixels);
 
 	    /* [Font Size Adjust] */
-	    // typography_obj.outputs.font_size_adjust = typography_obj.parameters.font_height_ratio;
+	    typography_obj.outputs.font_size_adjust = typography_obj.parameters.font_height_ratio;
 	    // Value uncertain: Only works in Firefox, after font already loaded?
-
-	    // console.log(typography_obj.outputs);
 
 	    /*
 	     * Apply style properties to "typography" class
@@ -227,6 +225,7 @@ var typography_obj = new function() {
 		typography_css.setAttribute("type", "text/css");
 
 		var typography_root_size = ":root { " +
+			"--kemosite-typography-font-size-adjust: "+typography_obj.outputs.font_size_adjust+";" +
 			"--kemosite-typography-100: "+typography_obj.outputs.font_height_pixels_100+"px;" +
 			"--kemosite-typography-200: "+typography_obj.outputs.font_height_pixels_200+"px;" +
 			"--kemosite-typography-300: "+typography_obj.outputs.font_height_pixels_300+"px;" +
@@ -253,6 +252,35 @@ var typography_obj = new function() {
 		}
 
 		document.getElementsByTagName("head")[0].insertBefore(typography_css, document.getElementsByTagName("head")[0].childNodes[0]);
+
+		if (window.matchMedia("(min-width: 39ch)").matches) {
+			
+			var column_elements = document.querySelectorAll(
+		     	"body.activate_kemosite_typography .post, "+
+		     	"body.activate_kemosite_typography .page, "+
+		     	"body.activate_kemosite_typography .single"
+		    );
+
+			for (var i = 0; i < column_elements.length; i++) {
+
+				var column_element = typography_obj.recursive_locate_text(column_elements[i]);
+				var column_scan_text_elements = column_element.querySelectorAll("p, li");
+				
+				for (var ii = 0; ii < column_scan_text_elements.length; ii++) {
+					
+					var column_scan_text = typography_obj.recursive_locate_text(column_scan_text_elements[ii]);
+					console.log(column_scan_text.innerHTML.length);
+					console.log(column_element); // should be an <article> element
+
+					if (column_scan_text.innerHTML.length >= 156) {
+						column_element.classList.add("kemosite_typography_columns");
+					}
+
+				}
+
+			}
+
+		}
 
 	};
 
