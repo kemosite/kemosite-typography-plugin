@@ -6,11 +6,11 @@ Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseorphan_control_element for all devices. Version matches last tested Wordpress.
 Requires at least: 5.7
-Version: 5.7.2.2
+Version: 5.7.2.3
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
 License URI: LICENSE
-Text Domain: kemosite-wordpress-theme
+Text Domain: kemosite-typography-plugin
 */
 
 var typography_obj = new function() {	
@@ -235,10 +235,6 @@ var typography_obj = new function() {
 			"--kemosite-typography-700: "+typography_obj.outputs.font_height_pixels_700+"px;" +
 			"--kemosite-typography-800: "+typography_obj.outputs.font_height_pixels_800+"px;" +
 			"--kemosite-typography-900: "+typography_obj.outputs.font_height_pixels_900+"px;" +
-		"} " +
-		"html { "+
-			// "font-size: var(--kemosite-typography"+adaptive_font_size+") !important;" +
-			"font-size: 1rem !important;" +
 		"} ";
 
 		if (typography_css.styleSheet) {
