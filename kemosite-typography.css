@@ -8,7 +8,7 @@ Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseorphan_control_element for all devices. Version matches last tested Wordpress.
 Requires at least: 5.7
-Version: 5.7.2.3
+Version: 5.7.2.4
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -25,19 +25,41 @@ Text Domain: kemosite-typography-plugin
 	--kemosite-typography-line-height: 3ex;
 }
 
-body.activate_kemosite_typography {
-	font-size: var(--kemosite-typography-500);
-	font-size-adjust: var(--kemosite-typography-font-size-adjust);
+@media screen {
+	
+	body.activate_kemosite_typography {
+		font-size: var(--kemosite-typography-500);
+		font-size-adjust: var(--kemosite-typography-font-size-adjust);
+	}
+	body._100.activate_kemosite_typography { font-size: var(--kemosite-typography-100); }
+	body._200.activate_kemosite_typography { font-size: var(--kemosite-typography-200); }
+	body._300.activate_kemosite_typography { font-size: var(--kemosite-typography-300); }
+	body._400.activate_kemosite_typography { font-size: var(--kemosite-typography-400); }
+	body._500.activate_kemosite_typography { font-size: var(--kemosite-typography-500); }
+	body._600.activate_kemosite_typography { font-size: var(--kemosite-typography-600); }
+	body._700.activate_kemosite_typography { font-size: var(--kemosite-typography-700); }
+	body._800.activate_kemosite_typography { font-size: var(--kemosite-typography-800); }
+	body._900.activate_kemosite_typography { font-size: var(--kemosite-typography-900); }
+
 }
-body._100.activate_kemosite_typography { font-size: var(--kemosite-typography-100); }
-body._200.activate_kemosite_typography { font-size: var(--kemosite-typography-200); }
-body._300.activate_kemosite_typography { font-size: var(--kemosite-typography-300); }
-body._400.activate_kemosite_typography { font-size: var(--kemosite-typography-400); }
-body._500.activate_kemosite_typography { font-size: var(--kemosite-typography-500); }
-body._600.activate_kemosite_typography { font-size: var(--kemosite-typography-600); }
-body._700.activate_kemosite_typography { font-size: var(--kemosite-typography-700); }
-body._800.activate_kemosite_typography { font-size: var(--kemosite-typography-800); }
-body._900.activate_kemosite_typography { font-size: var(--kemosite-typography-900); }
+
+@media print {
+	
+	body.activate_kemosite_typography {
+		font-size: 12pt;
+		font-size-adjust: var(--kemosite-typography-font-size-adjust);
+	}
+	body._100.activate_kemosite_typography { font-size: 10pt; }
+	body._200.activate_kemosite_typography { font-size: 10.5pt; }
+	body._300.activate_kemosite_typography { font-size: 11pt; }
+	body._400.activate_kemosite_typography { font-size: 11.5pt; }
+	body._500.activate_kemosite_typography { font-size: 12pt; }
+	body._600.activate_kemosite_typography { font-size: 12.5pt; }
+	body._700.activate_kemosite_typography { font-size: 13pt; }
+	body._800.activate_kemosite_typography { font-size: 13.5pt; }
+	body._900.activate_kemosite_typography { font-size: 14pt; }
+	  
+}
 
 body.activate_kemosite_typography button,
 body.activate_kemosite_typography .button,
