@@ -2,11 +2,11 @@
 
 defined( 'ABSPATH' ) or die();
 
-$version = '5.8.3.0';
+$version = '5.9.4.0';
 
 /**
  * @package kemosite-typography-plugin
- * @version 5.8.3.0
+ * @version 5.9.4.0
  */
 /*
 Plugin Name: kemosite-typography-plugin
@@ -15,8 +15,8 @@ Github Plugin URI: https://github.com/kemosite/kemosite-typography-plugin
 Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseline for all devices.
-Requires at least: 5.8
-Version: 5.8.3.0
+Requires at least: 5.9
+Version: 5.9.4.0
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -24,11 +24,13 @@ Text Domain: kemosite-wordpress-theme
 */
 
 // Determine whether this is an AMP response.
+/*
 if (!function_exists('is_amp_detected')):
 	function is_amp_detected() {
 	    return function_exists( 'is_amp_endpoint' ) && is_amp_endpoint();
 	}
 endif;
+*/
 
 add_action( 'admin_menu', 'kemosite_typography_menu' );
 
@@ -135,9 +137,11 @@ function load_kemosite_typography_script() {
 
 	// Do not load scripts if AMP is detected.
 	// Consider whether an AMP version is possible, or even necessary.
+	/*
 	if (is_amp_detected() ) {
         return;
     }
+    */
 
 	global $version;
 
@@ -165,7 +169,7 @@ function load_kemosite_typography_script() {
 					}
 				});
 			});
-		'); // Now supports presense of Chart JS!
+		');
 
 		if ($orphan_control === 'orphan_control'):
 			wp_add_inline_script( 'activate_kemosite_typography', 'document.addEventListener("DOMContentLoaded", function() { typography_obj.orphans_control(); });');
