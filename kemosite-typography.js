@@ -6,7 +6,7 @@ Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: Adaptively establishes a reasonable typographic baseline for all devices. Version matches last tested Wordpress.
 Requires at least: 5.9
-Version: 5.9.4.0
+Version: 5.9.4.1
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
 License URI: LICENSE
