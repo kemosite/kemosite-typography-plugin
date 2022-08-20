@@ -7,8 +7,8 @@ Github Plugin URI: https://github.com/kemosite/kemosite-typography-plugin
 Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: Adaptively establishes a reasonable typographic baseline for all devices. Version matches last tested Wordpress.
-Requires at least: 5.9
-Version: 5.9.4.1
+Requires at least: 6.0
+Version: 6.0.1.1
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -73,7 +73,9 @@ body.activate_kemosite_typography {
 
 body.activate_kemosite_typography button,
 body.activate_kemosite_typography .button,
-body.activate_kemosite_typography .wp-block-button {
+body.activate_kemosite_typography .wp-block-button,
+body.activate_kemosite_typography .sharedaddy,
+body.activate_kemosite_typography .jp-relatedposts  {
 	column-span: all;
 	width: 100%;
 }

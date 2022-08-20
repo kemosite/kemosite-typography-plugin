@@ -2,11 +2,11 @@
 
 defined( 'ABSPATH' ) or die();
 
-$version = '5.9.4.1';
+$version = '6.0.1.1';
 
 /**
  * @package kemosite-typography-plugin
- * @version 5.9.4.1
+ * @version 6.0.1.1
  */
 /*
 Plugin Name: kemosite-typography-plugin
@@ -15,8 +15,8 @@ Github Plugin URI: https://github.com/kemosite/kemosite-typography-plugin
 Author: Kevin Montgomery
 Author URI: https://github.com/kemosite/
 Description: This plug-in establishes a reasonable typographic baseline for all devices.
-Requires at least: 5.9
-Version: 5.9.4.1
+Requires at least: 6.0
+Version: 6.0.1.1
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
 License URI: LICENSE
@@ -118,20 +118,24 @@ $activate_kemosite_typography = esc_attr( get_option('activate_kemosite_typograp
 if ($activate_kemosite_typography === "activate_kemosite_typography"):
 	add_filter( 'body_class','kemosite_typography_classes' );
 endif;
-function kemosite_typography_classes( $classes ) {
+if ( !function_exists('kemosite_typography_classes') ) :
+
+	function kemosite_typography_classes( $classes ) {
  	
-	$activate_kemosite_typography = esc_attr( get_option('activate_kemosite_typography'));
-	if ($activate_kemosite_typography === "activate_kemosite_typography"):
+		$activate_kemosite_typography = esc_attr( get_option('activate_kemosite_typography'));
+		if ($activate_kemosite_typography === "activate_kemosite_typography"):
 
-		$classes[] = $activate_kemosite_typography;
-		$classes[] = esc_attr( get_option('adaptive_font_size'));
-		$classes[] = esc_attr( get_option('orphan_control'));
-     
-	    return $classes;
+			$classes[] = $activate_kemosite_typography;
+			$classes[] = esc_attr( get_option('adaptive_font_size'));
+			$classes[] = esc_attr( get_option('orphan_control'));
+	     
+		    return $classes;
 
-    endif;
-     
-}
+	    endif;
+	     
+	}
+
+endif;
 
 function load_kemosite_typography_script() {
 
